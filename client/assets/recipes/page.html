@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080807">
+  <title>Рецепты · Прайм-тело</title>
+  <link rel="icon" href="../../assets/brand/favicon.png">
+  <link rel="stylesheet" href="style.css?v=discovery6">
+  <script src="model.js?v=discovery6" defer></script>
+  <script src="recipes.js?v=discovery6" defer></script>
+  <script src="recipes-extra.js?v=discovery6" defer></script>
+  <script src="app.js?v=intro8" defer></script>
+</head>
+<body>
+  <main class="app" id="catalog">
+    <header class="app-header">
+      <div class="brand"><img src="../../assets/brand/logo-mark.png" alt=""><span>ПРАЙМ-ТЕЛО<small>Питание</small></span></div>
+      <span class="preview-badge">Прототип</span>
+    </header>
+    <section class="catalog-heading">
+      <div><span class="eyebrow">ГОТОВИТЬ В УДОВОЛЬСТВИЕ</span><h1>Рецепты</h1></div>
+      <button class="icon-button filter-button" id="openFilters" aria-label="Фильтры" title="Фильтры"><img src="assets/icons/sliders-horizontal.svg" alt=""><span id="filterCount" hidden></span></button>
+    </section>
+    <div class="recipe-search" role="search">
+      <img src="assets/icons/search.svg" alt="">
+      <input id="recipeSearch" type="search" placeholder="Название блюда" aria-label="Поиск по названию блюда" maxlength="120" autocomplete="off" spellcheck="false" enterkeyhint="search">
+      <button class="icon-button" id="clearSearch" aria-label="Очистить поиск" title="Очистить поиск" hidden><img src="assets/icons/x.svg" alt=""></button>
+    </div>
+    <div class="today-action">
+      <button class="primary-button" id="pickToday"><img src="assets/icons/utensils.svg" alt=""><span>Подобрать рецепт на сегодня</span></button>
+      <button class="icon-button" id="editPreferences" aria-label="Настроить подбор рецептов" title="Настроить подбор"><img src="assets/icons/user-round.svg" alt=""></button>
+    </div>
+    <nav class="tabs" aria-label="Подборка рецептов">
+      <button class="active" id="allTab" aria-pressed="true"><img src="assets/icons/utensils.svg" alt="">Все рецепты</button>
+      <button id="favoritesTab" aria-pressed="false"><img src="assets/icons/heart.svg" alt="">Избранное<span id="favoritesCount">0</span></button>
+    </nav>
+    <div class="active-filters" id="activeFilters" aria-label="Выбранные фильтры" hidden></div>
+    <div class="catalog-meta"><span id="resultCount" role="status"></span><button id="ppCollection" class="collection-button" aria-pressed="false">ПП-десерты</button></div>
+    <div class="recipe-grid" id="recipeGrid"></div>
+    <section class="empty-state" id="emptyState" hidden>
+      <img src="assets/icons/utensils.svg" alt=""><h2 id="emptyTitle"></h2><p id="emptyText"></p><button class="secondary-button" id="clearEmptyFilters">Сбросить фильтры</button>
+    </section>
+    <footer class="catalog-footer"><span class="footer-rule"></span><img src="assets/icons/utensils.svg" alt=""><span class="footer-rule"></span></footer>
+  </main>
+  <section class="recipe-view" id="recipeView" aria-label="Рецепт" hidden></section>
+  <dialog class="filter-dialog" id="filterDialog" aria-labelledby="filterTitle">
+    <form id="filterForm">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <header class="filter-header"><h2 id="filterTitle">Фильтры</h2><button class="icon-button" type="button" id="closeFilters" aria-label="Закрыть фильтры" title="Закрыть"><img src="assets/icons/x.svg" alt=""></button></header>
+      <div class="filter-fields">
+      <fieldset><legend>Что приготовим?</legend><div class="kind-options">
+        <label><input type="radio" name="kind" value="all" checked><span>Все блюда</span></label>
+        <label><input type="radio" name="kind" value="breakfast"><span>Завтраки</span></label>
+        <label><input type="radio" name="kind" value="lunch"><span>Обеды</span></label>
+        <label><input type="radio" name="kind" value="dinner"><span>Ужины</span></label>
+        <label><input type="radio" name="kind" value="snack"><span>Перекусы</span></label>
+        <label><input type="radio" name="kind" value="dessert"><span>Десерты</span></label>
+      </div></fieldset>
+      <fieldset><legend>Бюджет</legend><div class="kind-options">
+        <label><input type="radio" name="budget" value="all" checked><span>Любой</span></label>
+        <label><input type="radio" name="budget" value="simple"><span>Доступное</span></label>
+        <label><input type="radio" name="budget" value="balanced"><span>Среднее</span></label>
+        <label><input type="radio" name="budget" value="premium"><span>Премиум</span></label>
+      </div></fieldset>
+      <fieldset><legend>Время приготовления</legend><div class="kind-options">
+        <label><input type="radio" name="maxMinutes" value="0" checked><span>Любое</span></label>
+        <label><input type="radio" name="maxMinutes" value="15"><span>До 15 минут</span></label>
+        <label><input type="radio" name="maxMinutes" value="30"><span>До 30 минут</span></label>
+      </div></fieldset>
+      <fieldset><legend>Подборка</legend>
+        <label class="toggle-row"><span><img src="assets/icons/utensils.svg" alt=""><b>ПП-десерты</b></span><input type="checkbox" name="pp"><span class="switch" aria-hidden="true"></span></label>
+        <label class="toggle-row"><span><img src="assets/icons/flame.svg" alt=""><span><b>Больше белка</b><small>От 20 г на порцию</small></span></span><input type="checkbox" name="protein"><span class="switch" aria-hidden="true"></span></label>
+      </fieldset>
+      </div>
+      <footer class="filter-actions"><button type="button" class="reset-button" id="resetFilters">Сбросить</button><button type="submit" class="primary-button" id="applyFilters">Показать рецепты</button></footer>
+    </form>
+  </dialog>
+  <dialog class="filter-dialog quiz-dialog" id="quizDialog" aria-labelledby="quizTitle">
+    <form id="quizForm">
+      <header class="filter-header"><div><span class="eyebrow">ТВОИ ПРЕДПОЧТЕНИЯ</span><h2 id="quizTitle">Подберём рецепты</h2></div><button class="icon-button" type="button" id="closeQuiz" aria-label="Закрыть подбор" title="Закрыть"><img src="assets/icons/x.svg" alt=""></button></header>
+      <div class="quiz-progress"><progress id="quizProgress" value="1" max="3" aria-label="Прогресс подбора"></progress><span id="quizStep" aria-live="polite">1 из 3</span></div>
+      <div class="quiz-fields">
+        <fieldset data-quiz-step="0"><legend>Какой бюджет тебе подходит?</legend><div class="kind-options">
+          <label><input type="radio" name="budget" value="all" checked><span>Любой бюджет</span></label>
+          <label><input type="radio" name="budget" value="simple"><span>Доступное</span></label>
+          <label><input type="radio" name="budget" value="balanced"><span>Среднее</span></label>
+          <label><input type="radio" name="budget" value="premium"><span>Премиум</span></label>
+        </div></fieldset>
+        <fieldset data-quiz-step="1" hidden><legend>Сколько времени есть на готовку?</legend><div class="kind-options">
+          <label><input type="radio" name="maxMinutes" value="0" checked><span>Без ограничений</span></label>
+          <label><input type="radio" name="maxMinutes" value="15"><span>До 15 минут</span></label>
+          <label><input type="radio" name="maxMinutes" value="30"><span>До 30 минут</span></label>
+        </div></fieldset>
+        <fieldset data-quiz-step="2" hidden><legend>Что тебе ближе?</legend><div class="kind-options">
+          <label><input type="radio" name="preference" value="any" checked><span>Разнообразное питание</span></label>
+          <label><input type="radio" name="preference" value="protein"><span>Больше белка</span></label>
+          <label><input type="radio" name="preference" value="pp"><span>ПП-десерты</span></label>
+        </div></fieldset>
+        <p id="quizCount" class="quiz-count" role="status"></p>
+      </div>
+      <footer class="quiz-actions"><div class="quiz-navigation"><button type="button" class="back-button" id="quizBack" hidden><img src="assets/icons/arrow-left.svg" alt="">Назад</button><button type="submit" class="primary-button" id="quizNext">Дальше</button></div><button type="button" class="reset-button" id="skipQuiz">Пропустить</button></footer>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <noscript>Для просмотра рецептов включите JavaScript.</noscript>
+</body>
+</html>

@@ -1,0 +1,26 @@
+.proof-panel { display: grid; gap: 16px; min-width: 0; }
+/* Scoped overrides for the inherited app's global important theme rules. */
+.lib-sheet:has(.proof-panel) { background: #222 !important; color: #f4f4f4; border: 1px solid #555; border-radius: 8px !important; }
+.lib-sheet:has(.proof-panel), .lib-sheet:has(.proof-panel) * { letter-spacing: 0 !important; }
+.proof-panel .primary { background: #d8bd64 !important; color: #171717 !important; border: 1px solid #d8bd64; border-radius: 6px !important; box-shadow: none !important; }
+.proof-panel .secondary { background: #303030 !important; color: #f4f4f4 !important; border: 1px solid #666; border-radius: 6px !important; box-shadow: none !important; }
+.proof-panel p, .proof-panel h3 { color: #d8d8d8 !important; text-transform: none; }
+.proof-heading, .proof-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.proof-heading strong { font-size: 16px; }
+.proof-panel h3 { margin: 4px 0 0; font-size: 16px; }
+.proof-panel button { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.proof-panel button:disabled { opacity: .55; cursor: not-allowed; }
+.task2 .task-do[data-proof] { flex: 0 1 132px; min-width: 100px; max-width: 45%; min-height: 40px; white-space: normal; overflow-wrap: anywhere; letter-spacing: 0; }
+.proof-field { display: grid; gap: 8px; margin-bottom: 16px; font-size: 14px; }
+.proof-field input, .proof-field textarea { box-sizing: border-box; width: 100%; min-width: 0; max-width: 100%; font: inherit; }
+.proof-field textarea { padding: 10px; color: inherit; background: transparent; border: 1px solid #777; border-radius: 6px; resize: vertical; }
+.proof-preview { display: block; width: 100%; max-height: 340px; aspect-ratio: 4 / 3; object-fit: contain; background: #171717; border-radius: 6px; margin: 10px 0; }
+.proof-pending { padding: 12px 0; border-top: 1px solid #777; border-bottom: 1px solid #777; }
+.proof-pending p, .proof-history p, .proof-message { overflow-wrap: anywhere; white-space: pre-wrap; font-size: 14px; }
+.proof-message:empty { display: none; }
+.proof-history { list-style: none; margin: 0; padding: 0; }
+.proof-history li { padding: 16px 0; border-top: 1px solid #777; }
+.proof-history li > div:first-child { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+.proof-history time { font-size: 13px; }
+.proof-feedback { border-left: 3px solid #b9a353; padding-left: 12px; }
+.proof-download { display: inline-block; padding: 8px 0; color: #d8bd64; font-size: 14px; }

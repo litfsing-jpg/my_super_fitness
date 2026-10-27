@@ -1,0 +1,25 @@
+{
+  "id": "demo-squat",
+  "name": "Bodyweight squat",
+  "nameRu": "Приседание без отягощения",
+  "datasetVersion": "whitelabel-v1",
+  "primary": [
+    "quadriceps",
+    "glutes"
+  ],
+  "secondary": [
+    "hamstrings"
+  ],
+  "equipment": "body only",
+  "level": "beginner",
+  "force": "push",
+  "pose": "squat_bw",
+  "videoSrc": "/assets/neutral/squat.mp4",
+  "poster": "/assets/neutral/training.png",
+  "stepsRu": [
+    "Поставь стопы устойчиво.",
+    "Отведи таз назад и согни колени.",
+    "Вернись в исходное положение без рывка."
+  ],
+  "mediaNote": "Демонстрация интерфейса, не видеоурок тренера."
+}

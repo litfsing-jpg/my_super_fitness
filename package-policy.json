@@ -1,0 +1,9 @@
+{
+ "version":1,
+ "rootFiles":["AGENTS.md","README.md","START_HERE.md","THIRD_PARTY_NOTICES.md",".gitignore",".dockerignore",".env.example","brand.config.json","package.json","package-lock.json","package-policy.json"],
+ "textRoots":{"server":[".mjs"],"client":[".js",".mjs",".html",".css",".svg"],"backend":[".sql"],"scripts":[".mjs"],"tests":[".mjs",".sql"],"docs":[".md"]},
+ "demoCatalogs":["exercises","band-exercises","foods","dishes","videos","stretching","ready-programs","recipe-visuals"],
+ "neutralAssets":["logo.svg","avatar.svg","training.png","quesadilla.png","crumble.png","squat.mp4","pushup.mp4","row.mp4"],
+ "ignored":[".git",".local",".tmp",".env",".env.local",".env.production",".vercel","node_modules","dist",".DS_Store",".hyperframes",".supabase"],
+ "maxFiles":1500,"maxTotalBytes":104857600
+}

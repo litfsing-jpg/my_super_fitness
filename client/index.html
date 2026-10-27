@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#080807" />
+  <link rel="icon" type="image/png" href="assets/neutral/training.png?v=flow46" />
+  <link rel="apple-touch-icon" href="assets/neutral/training.png?v=flow46" />
+  <meta name="description" content="Форма: мобильная фитнес-платформа Форма с анкетой, тренировками, питанием, техникой через камеру, прогрессом, куратором и закрытым клубом." />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Форма</title>
+  <!-- Telegram Mini App SDK. SRI НЕ ставим: Telegram обновляет файл без версии, фиксированный хэш сломает Mini App; грузим с first-party telegram.org. -->
+  
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css?v=health18-shortcuts53-recipes20261019-1" />
+  <link rel="stylesheet" href="fitness-shell.css?v=20261026-1" />
+</head>
+<body>
+  <div id="pbSplash" class="pb-splash" role="status" aria-label="Загрузка Форма">
+    <div class="pb-splash-inner">
+      <img class="pb-splash-logo" src="assets/neutral/training.png?v=flow47" alt="Форма" />
+      <div class="pb-splash-bar"><span></span></div>
+    </div>
+  </div>
+  <noscript><style>#pbSplash{display:none!important}</style><div style="padding:24px;max-width:430px;margin:0 auto;color:#F2EFE8;font-family:-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5"><h1 style="margin:0 0 12px;font-size:24px">Форма</h1><p>Приложение требует JavaScript для перехода между экранами, анкеты, чата с куратором и трекеров. Включите JS в настройках браузера.</p></div></noscript>
+  <div class="ambient" aria-hidden="true"><span class="mesh"></span></div>
+
+  <main class="phone-app" id="app">
+    <header class="app-header">
+      <button class="avatar-btn brand-btn" id="profileInitial" data-jump="more" aria-label="Открыть меню"><img src="assets/neutral/training.png?v=flow46" alt="Форма" /></button>
+      <div class="header-copy"><span>Форма</span><b id="screenTitle">Форма</b></div>
+      <button class="app-lamp" id="tourBtn" aria-label="Подсказки: где что находится"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 18h5M10.5 21h3M12 3a6 6 0 0 0-3.8 10.6c.8.7 1.3 1.4 1.3 2.4h5c0-1 .5-1.7 1.3-2.4A6 6 0 0 0 12 3Z"/></svg></button>
+      <button class="tg-mini" data-jump="club" aria-label="Telegram-клуб">TG</button>
+    </header>
+
+    <nav class="quick-scroll" aria-label="Все модули">
+      <button class="active" data-jump="today">Сегодня</button>
+      <button data-jump="onboarding">Старт</button>
+      <button data-jump="guide">Навигатор</button>
+      <button data-jump="training">Тренировки</button>
+      <button data-jump="nutrition">Питание</button>
+      <button data-jump="bodymap">Аватар</button>
+      <button data-jump="forecast">Прогноз</button>
+      <button data-jump="technique">Техника</button>
+      <button data-jump="bio">Кабинет</button>
+      <button data-jump="rewards">Статус</button>
+      <button data-jump="reports">Отчёты</button>
+      <button data-jump="curator">Куратор</button>
+      <button data-jump="health">Health</button>
+      <button data-jump="pharma">Фарма</button>
+      <button data-jump="peptides">Пептиды</button>
+      <button data-jump="market">Магазин</button>
+      <button data-jump="growth">Рефералка</button>
+      <button data-jump="club">TG-клуб</button>
+    </nav>
+
+    <section class="screen active home-screen" id="today" data-title="Форма">
+      <div class="photo-home" aria-label="Главная">
+        <header class="photo-home-header">
+          <div class="photo-home-brand"><h1>Форма</h1><p>СЕГОДНЯ ЛУЧШЕ, ЧЕМ ВЧЕРА</p></div>
+          <div class="home-header-actions"><button type="button" class="home-streak" data-jump="reports" aria-label="Серия и прогресс"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c0 3-2 4-2 7 0 1 .5 2 1 2 1-1 2-2 2-4 3 2 5 5 5 8a6 6 0 0 1-12 0c0-3 1-5 3-7 0 2 1 3 2 3"/></svg><span>Серия<strong id="homePhotoStreak">—</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button><button type="button" class="home-photo-tour" id="homeTourBtn" aria-label="Краткая экскурсия по платформе" title="Экскурсия по платформе"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 18h5M10.5 21h3M12 3a6 6 0 0 0-3.8 10.6c.8.7 1.3 1.4 1.3 2.4h5c0-1 .5-1.7 1.3-2.4A6 6 0 0 0 12 3Z"/></svg></button></div>
+        </header>
+        <article class="home-photo-card home-photo-training" aria-labelledby="homeTrainingTitle">
+          <img class="home-photo" src="assets/neutral/training.png" alt="" width="1100" height="733" fetchpriority="high" />
+          <div class="home-photo-copy"><div class="home-photo-top"><span class="home-photo-eyebrow">СЕГОДНЯ</span><button type="button" class="home-photo-detail" id="homeReadiness">Самочувствие<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button></div><h2 id="homeTrainingTitle">Тренировка</h2><p>Сильнее. Выносливее.<br />Увереннее.</p><button type="button" class="home-photo-cta" id="homeTrainingCta"><span>Перейти к тренировке</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button><p class="home-photo-status" id="homeTrainingStatus" aria-live="polite">Загружаем план…</p></div>
+          <div class="home-training-stats"><div><span>Тренировок на этой неделе</span><b id="homePhotoWeek">—</b></div><div><span>Цель</span><b id="homePhotoGoal">—</b></div><div><span>Время сегодня</span><b id="homePhotoDuration">—</b></div></div>
+        </article>
+        <article class="home-photo-card home-photo-food" aria-labelledby="homeFoodTitle">
+          <img class="home-photo" src="assets/neutral/training.png" alt="" width="1100" height="733" />
+          <div class="home-photo-copy"><div class="home-photo-top"><span class="home-photo-eyebrow">СЕГОДНЯ</span><button type="button" class="home-photo-detail" data-jump="nutrition">Подробнее<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button></div><h2 id="homeFoodTitle">Еда</h2><p>Топливо для лучших<br />результатов.</p><button type="button" class="home-photo-cta" id="homeFoodCta"><span>Добавить приём пищи</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button></div>
+          <div class="home-food-stats" aria-live="polite"><div class="home-calorie-ring" id="homePhotoRing" role="progressbar" aria-label="Калории за сегодня" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16"/><circle class="home-ring-fill" cx="20" cy="20" r="16" pathLength="100"/></svg></div><div class="home-calorie-copy"><span>Калории</span><b id="homePhotoCalories">— / —</b><div class="home-calorie-bar"><i id="homePhotoCaloriesFill"></i></div><p id="homePhotoMacros">Б — г · Ж — г · У — г</p></div><p id="homePhotoFoodStatus" class="home-food-status">Загружаем дневник…</p><button type="button" class="home-retry" id="homePhotoRetry" hidden>Повторить загрузку</button></div>
+        </article>
+      </div>
+      <article class="subscription-notice" id="subscriptionNotice" data-stage="d3" hidden aria-live="polite">
+        <div class="subscription-notice-copy">
+          <span id="subscriptionNoticeKicker">Подписка</span>
+          <b id="subscriptionNoticeTitle">Доступ активен</b>
+          <p id="subscriptionNoticeText">Статус подписки появится здесь.</p>
+        </div>
+        <button type="button" class="subscription-notice-action" id="subscriptionRenewBtn">Продлить доступ</button>
+      </article>
+      <section class="simple-day-intro simple-only" aria-labelledby="simpleDayTitle">
+        <span id="simpleDayDate">Сегодня</span>
+        <h1 id="simpleDayTitle">Твой план на сегодня</h1>
+        <p id="simpleDaySummary">Начни с главного действия. Остальное можно добавить по ходу дня.</p>
+      </section>
+      <article class="home-hero glass-card reveal" id="homeHero">
+        <div class="hero-main" id="heroToggle" role="button" tabindex="0" aria-expanded="false" aria-controls="heroDetail">
+          <div class="hero-text">
+            <span class="home-eyebrow">Форма · личный кабинет</span>
+            <h1 id="heroLevelNum">Уровень 1</h1>
+            <div class="hero-tags"><span class="hero-league" id="heroLeague">Новичок</span><span class="hero-archetype" id="heroArchetype">На старте пути</span></div>
+            <p class="hero-today" id="heroToday">Сегодня: тренировка дня</p>
+            <p class="hero-goals" id="heroGoalsLine">Цели дня: 0 из 9 закрыто</p>
+            <div class="hero-progress">
+              <div class="hero-bar"><i id="heroBarFill" style="width:0%"></i></div>
+              <span class="hero-progress-label" id="heroProgressLabel">ещё цели до нового уровня</span>
+            </div>
+            <span class="hero-expand" id="heroExpandHint">Открыть прогресс<i></i></span>
+          </div>
+          <div class="home-avatar" id="homeAvatar" aria-hidden="true">
+            <span class="figure-aura" id="figureAura"></span>
+            <span class="figure-wrap" id="figureWrap"></span>
+            <span class="figure-badge" id="figureBadge">Ур.1</span>
+          </div>
+        </div>
+        <div class="hero-detail" id="heroDetail" hidden>
+          <div class="hero-detail-head">
+            <div><span class="home-eyebrow">Прогресс персонажа</span><b id="heroXp">0 баллов · Новичок</b></div>
+            <button type="button" class="hero-collapse" id="heroCollapse" aria-label="Свернуть прогресс">Свернуть<i></i></button>
+          </div>
+          <div class="level-ladder" id="levelLadder" aria-hidden="true"></div>
+          <div class="hero-next" id="heroNext">Закрывай цели дня: каждая поднимает уровень персонажа.</div>
+          <div class="cabinet-snapshot" aria-label="Анкета и антропометрия">
+            <div><span>Профиль</span><b id="homeProfileName">...</b></div>
+            <div><span>Цель</span><b id="homeGoal">...</b></div>
+            <div><span>Уровень анкеты</span><b id="homeLevel">...</b></div>
+            <div><span>Вес</span><b id="homeWeight">...</b></div>
+          </div>
+          <div class="hero-remaining">
+            <span class="home-eyebrow">Цели, которые поднимут уровень</span>
+            <div class="remaining-list" id="remainingGoals"></div>
+          </div>
+          <button type="button" class="secondary" data-jump="rewards">Открыть игру клуба и призы</button>
+        </div>
+      </article>
+
+      <div class="home-stats reveal delay-1">
+        <button data-jump="bio"><span>Вода</span><b id="waterMetric">0/—</b></button>
+        <button data-jump="training"><span>Серия</span><b id="streakDays">0</b></button>
+        <button data-jump="bodymap"><span>Баллы</span><b id="scoreMetric">0</b></button>
+        <button data-jump="rewards"><span>Статус</span><b id="leagueMetric">Новичок</b></button>
+      </div>
+
+      <section class="today-dashboard reveal delay-2" aria-label="Статус дня">
+        <article class="today-focus-card">
+          <div class="today-focus-main">
+            <span class="today-feature-icon today-feature-icon--focus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5h10M9 12h10M9 19h10"/><path d="m3 5 1.5 1.5L7 4M3 12l1.5 1.5L7 11M3 19l1.5 1.5L7 18"/></svg></span>
+            <div class="today-focus-copy"><span>Следующий шаг</span><b id="todayNextTitle">Открыть тренировку дня</b><em id="todayNextText">Закрой тренировку, и цель дня засчитается автоматически.</em></div>
+          </div>
+          <button type="button" class="primary shine" id="todayNextCta" data-jump="training">Начать</button>
+        </article>
+        <div class="simple-quick-actions simple-only" aria-label="Быстрые действия">
+          <button type="button" id="simpleFoodAdd"><svg class="today-quick-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11c.7 4 3 6 7 6s6.3-2 7-6H5Z"/><path d="M8 11c.6-2.4 2-3.7 4-3.7s3.4 1.3 4 3.7M12 17v3"/></svg><span class="simple-action-copy"><span>Питание</span><b>Добавить еду</b></span></button>
+          <button type="button" id="simpleWaterAdd"><svg class="today-quick-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.5-2.5-5L12 2 7.5 10C6 11.5 5 13 5 15a7 7 0 0 0 7 7Z"/><path d="M9.5 16.5c.7 1 1.5 1.5 2.5 1.5"/></svg><span class="simple-action-copy"><span>Вода</span><b>+200 мл</b></span></button>
+          <button type="button" id="simpleWaterUndo" hidden><span>Последнее действие</span><b>Отменить воду</b></button>
+        </div>
+        <article class="prime-day-card" id="primeDayCard" data-tone="neutral">
+          <svg class="today-card-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6a5.5 5.5 0 0 0 1-8.8Z"/><path d="M3.8 13h4l1.5-3 3 6 1.5-3h6.4"/></svg>
+          <div class="prime-day-content"><div class="prime-day-top"><div><span>Самочувствие</span><b id="primeDayTitle">Проверь состояние</b></div></div><p id="primeDayNote">30 секунд: сон, энергия и мышечная усталость. План останется твоим, но станет реалистичнее.</p><div class="prime-day-bottom"><em id="primeDayPlan">План пока без адаптации.</em><button type="button" id="primeDayOpen">Проверить</button></div></div>
+        </article>
+        <div class="today-status-grid">
+          <button type="button" class="today-status" data-jump="nutrition"><svg class="today-status-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c4 0 7-2.7 7-6.5 0-2.2-1.1-4-3.3-5.8.1 2-1 3.2-2 3.8.4-4.2-1.8-7.9-5.4-10.5.2 3-1.2 5-2.5 6.7C4.7 11.2 5 14 5 15.5 5 19.3 8 22 12 22Z"/></svg><span class="today-status-copy"><span>Калории</span><b id="todayKcalLeft">...</b><em id="todayKcalSub">остаток на день</em></span></button>
+          <button type="button" class="today-status" data-jump="nutrition"><svg class="today-status-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19V8"/></svg><span class="today-status-copy"><span>БЖУ</span><b id="todayMacrosLeft">...</b><em>остаток по норме</em></span></button>
+          <button type="button" class="today-status" data-jump="nutrition"><svg class="today-status-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.5-2.5-5L12 2 7.5 10C6 11.5 5 13 5 15a7 7 0 0 0 7 7Z"/></svg><span class="today-status-copy"><span>Вода</span><b id="todayWaterLeft">...</b><em id="todayWaterSub">до нормы</em></span></button>
+          <button type="button" class="today-status" data-jump="training"><svg class="today-status-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7v10M18 7v10M3 9v6M21 9v6M6 12h12"/></svg><span class="today-status-copy"><span>Тренировка</span><b id="todayWorkoutStatus">...</b><em id="todayWorkoutSub">план дня</em></span></button>
+        </div>
+        <div class="today-links" aria-label="Дополнительные разделы">
+          <button type="button" data-jump="bodymap">Тело</button>
+          <button type="button" data-jump="health">Здоровье</button>
+          <button type="button" data-jump="club">Клуб</button>
+          <button type="button" data-jump="rewards">Статус</button>
+          <button type="button" id="supportToday">Помощь</button>
+        </div>
+      </section>
+
+      <article class="prime-challenge-card reveal delay-3" id="primeChallengeCard" hidden>
+        <div class="prime-challenge-head"><div><span>7 дней ритма</span><b id="primeChallengeTitle">Мини-челлендж</b></div><strong id="primeChallengeCount">0 / 4</strong></div>
+        <p id="primeChallengeText">Тренировки, питание, вода и самочувствие — без идеальных дней.</p>
+        <div class="prime-challenge-progress"><i id="primeChallengeFill" style="width:0%"></i></div>
+        <div class="prime-challenge-actions"><button type="button" id="primeChallengeJoin">Участвовать</button><button type="button" id="primeChallengeShare">Позвать партнёра</button></div>
+      </article>
+
+      <section class="apple-health-today daily-result-today reveal delay-3" id="appleHealthToday" aria-label="Итог дня по Форма и Apple Health" hidden>
+        <div class="apple-health-title"><span>Итог дня</span><b id="dailyResultStatus">Сегодня</b></div>
+        <div class="apple-health-metrics daily-result-metrics">
+          <div><span>Съедено</span><b id="dailyResultEaten">0 ккал</b></div>
+          <div><span>Активные ккал</span><b id="appleHealthEnergy">...</b></div>
+          <div><span>Шаги</span><b id="appleHealthSteps">...</b></div>
+          <div><span>Тренировка</span><b id="dailyResultWorkout">...</b></div>
+        </div>
+        <p class="daily-result-summary" id="dailyResultBalance">Питание и активность соберутся в один результат после синхронизации.</p>
+        <span class="daily-result-source">Активность: <b id="appleHealthSyncState">...</b> · Apple Health уже включает тренировочный расход</span>
+      </section>
+
+      <article class="today-strip glass-card reveal delay-3">
+        <div class="card-head compact"><div><h2>План на сегодня</h2><p>Тренировка и инвентарь по анкете. Остальное закрывается в задачах дня.</p></div><span class="pill">по анкете</span></div>
+        <div class="mini-plan" id="dailyPlanList"></div>
+        <button class="secondary" data-jump="training">Открыть тренировку дня</button>
+      </article>
+    </section>
+
+    <section class="screen" id="onboarding" data-title="Стартовая анкета">
+      <article class="glass-card reveal anketa-card">
+        <div class="card-head"><div><h2>Стартовая анкета</h2><p id="anketaSub">Соберём первичный анамнез: тренировки, питание и задания пересоберутся под тебя.</p></div><span class="pill" id="anketaBadge">Шаг 1 из 5</span></div>
+        <div class="anketa-progress" id="anketaProgress"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        <form id="profileForm" class="profile-form">
+          <!-- Шаг 1: Физические данные -->
+          <fieldset class="anketa-step on" data-step="1">
+            <h3 class="step-h">1 · Физические данные</h3>
+            <label>Имя<input name="name" placeholder="Как тебя зовут" autocomplete="off" /></label>
+            <label>Пол<select name="gender"><option>Мужчина</option><option>Женщина</option></select></label>
+            <label>Возраст<input name="age" type="number" inputmode="numeric" placeholder="напр. 30" /></label>
+            <label>Вес, кг<input name="weight" type="number" inputmode="decimal" placeholder="напр. 82" /></label>
+            <label>Рост, см<input name="height" type="number" inputmode="numeric" placeholder="напр. 178" /></label>
+          </fieldset>
+          <!-- Шаг 2: Цель и маршрут -->
+          <fieldset class="anketa-step" data-step="2">
+            <h3 class="step-h">2 · Цель и маршрут</h3>
+            <label>Главная цель<select name="goal"><option selected>Сушка</option><option>Набор</option><option>Поддержание</option></select></label>
+            <label>Желаемый вес, кг<input name="targetWeight" type="number" inputmode="decimal" placeholder="если есть ориентир" /></label>
+            <label>Горизонт<select name="pace"><option selected>Спокойно · 12+ недель</option><option>Умеренно · 8–12 недель</option><option>Быстро · 4–8 недель</option></select></label>
+            <label>Почему сейчас?<input name="motivation" placeholder="здоровье, энергия, внешний вид, дисциплина" /></label>
+          </fieldset>
+          <!-- Шаг 3: Тренировочный анамнез -->
+          <fieldset class="anketa-step" data-step="3">
+            <h3 class="step-h">3 · Тренировочный анамнез</h3>
+            <label>Уровень<select name="level"><option>Новичок</option><option selected>Любитель</option><option>Подготовленный атлет</option></select></label>
+            <label>Тренировок в неделю<select name="days"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label>
+            <label>Время на тренировку<select name="sessionMinutes"><option>25</option><option selected>40</option><option>55</option><option>75</option></select></label>
+            <label>Дневная активность<select name="activityLevel"><option>Низкая</option><option selected>Умеренная</option><option>Высокая</option><option>Очень высокая</option></select></label>
+            <label>Локация<select name="place"><option selected>Дома</option><option>В зале</option><option>Спортплощадка</option></select></label>
+            <label>Инвентарь<select name="inventory"><option>Ничего нет</option><option value="Резинки" selected>Только резинки</option><option>Резинки + гантели</option><option>Турник + площадка</option><option>Полный зал</option></select></label>
+            <label>Интенсивность тренировок<select name="mode"><option selected>Лёгкий</option><option>Средний</option><option>Интенсивный</option></select></label>
+            <label class="full">Фокус <span class="lbl-hint">(что подтянуть в программе)</span></label>
+            <div class="injury-chips" id="focusChips">
+              <button type="button" class="inj-chip" data-z="Спина">Спина</button>
+              <button type="button" class="inj-chip" data-z="Грудь">Грудь</button>
+              <button type="button" class="inj-chip" data-z="Плечи">Плечи</button>
+              <button type="button" class="inj-chip" data-z="Руки">Руки</button>
+              <button type="button" class="inj-chip" data-z="Пресс">Пресс</button>
+              <button type="button" class="inj-chip" data-z="Ягодицы">Ягодицы</button>
+              <button type="button" class="inj-chip" data-z="Ноги">Ноги</button>
+              <button type="button" class="inj-chip" data-z="Мобильность">Мобильность</button>
+            </div>
+            <input type="hidden" name="focusZones" id="focusZonesField" />
+          </fieldset>
+          <!-- Шаг 4: Здоровье и ограничения -->
+          <fieldset class="anketa-step" data-step="4">
+            <h3 class="step-h">4 · Здоровье и ограничения</h3>
+            <label class="full">Проблемные зоны <span class="lbl-hint">(что бережём в упражнениях)</span></label>
+            <div class="injury-chips" id="injuryChips">
+              <button type="button" class="inj-chip" data-z="Плечо">Плечо</button>
+              <button type="button" class="inj-chip" data-z="Локоть">Локоть</button>
+              <button type="button" class="inj-chip" data-z="Запястье">Запястье</button>
+              <button type="button" class="inj-chip" data-z="Поясница">Поясница</button>
+              <button type="button" class="inj-chip" data-z="Спина">Спина</button>
+              <button type="button" class="inj-chip" data-z="ТБС">ТБС</button>
+              <button type="button" class="inj-chip" data-z="Колено">Колено</button>
+              <button type="button" class="inj-chip" data-z="Голеностоп">Голеностоп</button>
+              <button type="button" class="inj-chip" data-z="Шея">Шея</button>
+            </div>
+            <input type="hidden" name="injuries" id="injuriesField" />
+            <label class="full">Красные флаги <span class="lbl-hint">(если есть, нагрузку делаем мягче)</span></label>
+            <div class="injury-chips danger-chips" id="medicalFlagChips">
+              <button type="button" class="inj-chip" data-z="Боль в груди">Боль в груди</button>
+              <button type="button" class="inj-chip" data-z="Одышка">Одышка</button>
+              <button type="button" class="inj-chip" data-z="Головокружение">Головокружение</button>
+              <button type="button" class="inj-chip" data-z="Давление">Давление</button>
+              <button type="button" class="inj-chip" data-z="Диабет">Диабет</button>
+              <button type="button" class="inj-chip" data-z="Операция недавно">Операция недавно</button>
+              <button type="button" class="inj-chip" data-z="Диастаз">Диастаз</button>
+            </div>
+            <input type="hidden" name="medicalFlags" id="medicalFlagsField" />
+            <label>Здоровье / ограничения<input name="limits" placeholder="диагнозы, запреты врача, что нельзя делать" /></label>
+            <label>Лекарства / давление<input name="medications" placeholder="если влияет на нагрузку или питание" /></label>
+          </fieldset>
+          <!-- Шаг 5: Предпочтения в еде -->
+          <fieldset class="anketa-step" data-step="5">
+            <h3 class="step-h">5 · Питание и быт</h3>
+            <label>Тип питания<select name="diet"><option selected>Обычное</option><option>Без свинины</option><option>Вегетарианское</option><option>Безлактозное</option><option>Кето / низкоуглеводное</option></select></label>
+            <label>Рацион<select name="foodBudget"><option>Простые продукты</option><option selected>Баланс цена/качество</option><option>Расширенный / премиум</option></select></label>
+            <label>Приёмов пищи в день<select name="mealsPerDay"><option>3</option><option selected>4</option><option>5</option></select></label>
+            <label>Время на готовку<select name="cookingTime"><option>Минимум · 10–15 мин</option><option selected>Обычно · до 30 мин</option><option>Готовлю заранее</option></select></label>
+            <label>Режим питания<select name="mealTiming"><option selected>Обычный день</option><option>Поздние ужины</option><option>Сменный график</option><option>Часто ем вне дома</option></select></label>
+            <label>Не ем / не люблю<input name="dislikes" placeholder="напр. рыба, грибы, творог" /></label>
+            <label>Пищевые аллергии<input name="allergies" placeholder="напр. орехи, лактоза" /></label>
+          </fieldset>
+          <div class="anketa-nav">
+            <button type="button" class="secondary" id="anketaBack" hidden>Назад</button>
+            <button type="button" class="primary shine" id="anketaNext">Далее</button>
+            <button type="submit" class="primary shine" id="anketaFinish" hidden>Создать мою программу</button>
+          </div>
+          <div class="anketa-error" id="anketaError" hidden></div>
+        </form>
+      </article>
+    </section>
+
+    <section class="screen" id="training" data-title="Тренировки">
+      <article class="workout-card liquid reveal">
+        <div class="card-head"><div><h2 id="workoutTitle">Full body дома</h2><p>Собрана под твою цель, локацию, инвентарь и режим из анкеты.</p></div><span class="pill dark">~30–45 мин</span></div>
+        <div class="timeline" id="workoutTimeline"></div>
+        <div class="day-workout-actions"><button class="secondary" id="rerollDay">↻ Другая тренировка из базы</button><button class="secondary" id="chooseOwnDay">Заниматься по своей программе</button></div>
+        <button class="secondary" id="addPastWorkout">＋ Добавить тренировку за прошлый день</button>
+        <button class="primary shine" id="startDay">▶ Начать тренировку</button>
+      </article>
+      <div class="classic-training-menu">
+        <button class="primary shine lib-open-btn ready-programs-open" data-jump="programs">Готовые программы</button>
+        <button class="secondary lib-open-btn" data-jump="stretching">Растяжка</button>
+        <button class="primary shine lib-open-btn" data-jump="generator">Сгенерировать тренировку</button>
+        <button class="secondary lib-open-btn" data-jump="library">База упражнений</button>
+        <button class="secondary lib-open-btn" data-jump="saved">Мои тренировки</button>
+      </div>
+      <section class="simple-section-menu simple-only" aria-label="Другие тренировки">
+        <button type="button" data-jump="programs"><span>Следующий маршрут</span><b>Готовые программы</b><em>Планы на четыре недели</em></button>
+        <button type="button" data-jump="stretching"><span>Мягкая нагрузка</span><b>Растяжка и восстановление</b><em>Мобильность и восстановление</em></button>
+        <button type="button" data-jump="saved"><span>Личная коллекция</span><b>Мои тренировки</b><em>Сохранённые планы и история</em></button>
+        <details>
+          <summary>Создать тренировку</summary>
+          <div><button type="button" data-jump="generator">Собрать автоматически</button><button type="button" data-jump="saved" data-manual-create>Выбрать упражнения</button><button type="button" data-jump="technique">Проверить технику</button></div>
+        </details>
+      </section>
+    </section>
+
+    <section class="screen" id="stretching" data-title="Растяжка">
+      <div class="card-head"><div><h2>Растяжка</h2><p>Мобильность и восстановление</p></div></div>
+      <div id="stretchingLessons" class="stretching-grid" aria-live="polite"></div>
+      <button class="secondary lib-open-btn" data-jump="health">Восстановление</button>
+    </section>
+
+    <section class="screen" id="programs" data-title="Готовые программы">
+      <article class="glass-card reveal ready-programs-intro">
+        <div class="card-head compact"><div><span class="ready-programs-eyebrow">Маршруты на 4 недели</span><h2>Выбери свой ритм</h2><p>Готовые программы собираются из актуальной базы упражнений и сразу сверяются с твоей анкетой, инвентарём и ограничениями.</p></div><span class="pill" id="readyProgramsCount">42</span></div>
+        <div class="ready-program-active" id="readyProgramActive"></div>
+        <div class="lib-frow ready-program-filters" id="readyProgramFilters" aria-label="Фильтры готовых программ"></div>
+      </article>
+      <div class="ready-program-grid" id="readyProgramGrid"><div class="lib-empty">Подбираю программы под твою анкету…</div></div>
+    </section>
+
+    <section class="screen" id="library" data-title="База упражнений">
+      <article class="glass-card reveal">
+        <div class="card-head compact"><div><h2>База упражнений</h2><p>Упражнения и ваши видеообъяснения техники.</p></div><span class="pill" id="libCount">0</span></div>
+        <input id="libSearch" class="lib-search" type="search" placeholder="Поиск упражнения…" autocomplete="off" />
+        <div class="lib-filters">
+          <div class="lib-frow" id="libMuscles" aria-label="Мышцы"></div>
+          <div class="lib-frow" id="libEquip" aria-label="Оборудование"></div>
+          <div class="lib-frow" id="libLevel" aria-label="Уровень"></div>
+        </div>
+      </article>
+      <article class="glass-card reveal delay-1" id="libNikitaCard">
+        <div class="card-head compact"><div><h2>Видео-техника</h2><p>Разборы упражнений по локациям. Тапни, чтобы открыть видео.</p></div><span class="pill" id="libRailCount">721</span></div>
+        <div class="vid-tabs" id="libVidTabs"></div>
+        <div class="lib-rail" id="libRail"></div>
+      </article>
+      <div class="lib-grid" id="libGrid"><div class="lib-empty">Загружаю базу…</div></div>
+    </section>
+
+    <section class="screen" id="generator" data-title="Генератор тренировки">
+      <article class="glass-card reveal">
+        <div class="card-head compact"><div><h2>Собрать тренировку</h2><p>Под твою анкету: цель, уровень, оборудование. Выбери мышцы и жми «Сгенерировать».</p></div><span class="pill" id="genGoalPill">Сушка</span></div>
+        <div class="gen-ctx" id="genCtx"></div>
+        <h3 class="gen-h">Мышцы <span class="gen-hint">(не выбрано = всё тело)</span></h3>
+        <div class="lib-frow" id="genMuscles"></div>
+        <h3 class="gen-h">Оборудование</h3>
+        <div class="lib-frow equip" id="genEquip"></div>
+        <h3 class="gen-h">Упражнений: <span id="genCountVal">5</span></h3>
+        <div class="gen-stepper"><button type="button" id="genMinus" aria-label="меньше">−</button><div class="gen-bar"><i id="genCountBar"></i></div><button type="button" id="genPlus" aria-label="больше">+</button></div>
+        <button class="primary shine" id="genRun">Сгенерировать тренировку</button>
+        <button class="secondary" id="genWeek">Собрать план на неделю</button>
+      </article>
+      <article class="glass-card reveal delay-1" id="genResultCard" hidden>
+        <div class="card-head compact"><div><h2 id="genResTitle">Твоя тренировка</h2><p id="genResSub"></p></div><span class="pill" id="genResPill"></span></div>
+        <div class="gen-result" id="genResult"></div>
+        <div class="gen-actions"><button class="primary shine" id="genStart">▶ Начать тренировку</button><button class="secondary" id="genSave">Сохранить</button><button class="secondary" id="genReroll">Пересобрать</button></div>
+      </article>
+    </section>
+
+    <section class="screen" id="saved" data-title="Мои тренировки">
+      <button type="button" class="secondary lib-open-btn simple-only" data-jump="workout-history">История тренировок</button>
+      <article class="glass-card reveal manual-builder-card" id="manualBuilderCard">
+        <div class="card-head compact"><div><h2>Создать тренировку</h2><p>Выбирай любые упражнения из полной базы, добавляй их в нужном порядке и сохраняй как личную тренировку.</p></div><span class="pill" id="manualCount">0 упр.</span></div>
+        <div class="lib-frow manual-muscles" id="manualMuscles" aria-label="Группа мышц"></div>
+        <input type="search" class="lib-search manual-search" id="manualSearch" placeholder="Поиск упражнения…" autocomplete="off" />
+        <p class="manual-catalog-status" id="manualCatalogStatus" aria-live="polite"></p>
+        <div class="manual-picklist" id="manualPickList"><div class="lib-empty">Открой раздел, и я загружу базу упражнений.</div></div>
+        <div class="manual-selected" id="manualSelected"></div>
+        <div class="manual-actions"><button class="primary shine" id="manualSave" type="button">Сохранить программу</button><button class="secondary" id="manualClear" type="button">Очистить</button></div>
+      </article>
+      <article class="glass-card reveal">
+        <div class="card-head compact"><div><h2>Мои тренировки</h2><p>Сохранённые тренировки и планы. Отмечай выполнение, чтобы росли баллы и серия дней.</p></div><span class="pill" id="savedCount">0</span></div>
+        <div class="saved-list" id="savedList"></div>
+      </article>
+    </section>
+
+    <section class="screen" id="workout-history" data-title="История тренировок">
+      <div class="workout-archive-head"><h2>История тренировок</h2><button type="button" class="workout-archive-icon" id="workoutArchiveRefresh" title="Обновить историю" aria-label="Обновить историю">↻</button></div>
+      <div class="workout-archive-filters">
+        <label>Месяц<span class="workout-archive-month-input"><input type="month" id="workoutArchiveMonth" aria-label="Месяц тренировок"><button type="button" class="workout-archive-icon" id="workoutArchiveClear" title="Все месяцы" aria-label="Все месяцы">×</button></span></label>
+        <label>Занятия<select id="workoutArchiveStatus"><option value="completed">Завершённые</option><option value="all">Все</option><option value="unfinished">Незавершённые</option></select></label>
+      </div>
+      <div class="workout-archive-notice"><p id="workoutArchiveNotice" role="status"></p><button type="button" class="secondary" id="workoutArchiveRetry" hidden>Повторить загрузку</button></div>
+      <p class="workout-archive-count" id="workoutArchiveCount"></p>
+      <div id="workoutArchiveList"></div>
+      <button type="button" class="secondary workout-archive-more" id="workoutArchiveMore" hidden>Показать ещё</button>
+    </section>
+
+    <section class="screen" id="technique" data-title="Техника">
+      <article class="glass-card camera reveal">
+        <div class="cam-section-head">
+          <div><span>Проверка в кадре</span><h2>Техника спереди</h2></div>
+          <span class="cam-private">9:16 · на устройстве</span>
+        </div>
+        <div class="cam-stage" id="camStage">
+          <video id="camVideo" playsinline muted autoplay></video>
+          <canvas id="camCanvas"></canvas>
+          <div class="cam-guide" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="cam-placeholder" id="camPlaceholder">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"/><circle cx="12" cy="12.5" r="3.2"/><path d="M8 6l1.5-2h5L16 6"/></svg>
+            <b>Встань лицом к камере</b><span>Сначала проверим ракурс и кадр, затем включим анатомические подсказки.</span>
+          </div>
+          <div class="cam-hud"><span class="cam-score" id="camScore"></span><span class="cam-state" id="camState">Камера выключена</span></div>
+          <div class="cam-live-guide" id="camLiveGuide"><b>Фронтальный ракурс</b><span>Плечи и таз параллельны экрану</span></div>
+        </div>
+        <div class="cam-readiness" id="camReadiness" aria-label="Готовность к анализу">
+          <div class="cam-ready-item" data-check="front"><i>1</i><span>Лицом</span></div>
+          <div class="cam-ready-item" data-check="frame"><i>2</i><span>Тело в кадре</span></div>
+          <div class="cam-ready-item" data-check="quality"><i>3</i><span>Суставы видны</span></div>
+        </div>
+        <div class="cam-color-legend" id="camColorLegend" aria-label="Цвета проверки техники"><span class="good"><i></i><b>В норме</b></span><span class="bad"><i></i><b>Исправить</b></span><em>Скелет появится после распознавания</em></div>
+        <button type="button" class="cam-library-open" id="camLibraryOpen">
+          <span><small id="camSelectedLevel">Свободный режим</small><b id="camSelectedName">Свободная стойка</b><em id="camSelectedMeta">Общая фронтальная симметрия</em></span>
+          <i aria-hidden="true">›</i>
+        </button>
+        <div class="cam-quick-head"><span>Быстрый выбор</span><b id="camSupportedCount">Загружаю базу…</b></div>
+        <div class="cam-ex" id="camEx"></div>
+        <div class="cam-exercise-copy">
+          <span>Как встать</span>
+          <h3 id="camExerciseName">Свободная стойка</h3>
+          <p id="camExerciseSetup">Встань лицом к объективу, стопы и макушка в кадре, руки не закрывают корпус.</p>
+          <div class="cam-focus-list" id="camExerciseFocus"></div>
+        </div>
+        <button class="primary shine" id="camToggle">Включить камеру</button>
+        <div class="cam-record-controls" aria-label="Локальная запись подхода">
+          <button type="button" class="cam-record-toggle" id="camRecordToggle" disabled aria-pressed="false">
+            <span class="cam-record-icon" aria-hidden="true"><i></i></span>
+            <span class="cam-record-copy"><b id="camRecordTitle">Записать подход</b><small>Скелет и подсказки останутся в кадре</small></span>
+            <time id="camRecordTimer" datetime="PT0S">00:00</time>
+          </button>
+          <div class="cam-record-meta"><span id="camRecordState" aria-live="polite">Сначала включи камеру</span><button type="button" id="camRecordReview" hidden>Посмотреть запись</button></div>
+          <p>Видео остаётся на этом устройстве и никуда не отправляется.</p>
+        </div>
+        <button class="secondary" id="camHelp">Как поставить камеру</button>
+        <p class="cam-safety">Подсказки помогают увидеть положение тела, но не являются диагнозом. При боли останови упражнение и обратись к врачу или тренеру.</p>
+      </article>
+      <article class="glass-card cam-feedback reveal delay-1">
+        <div class="card-head compact"><div><h2>Анатомические ориентиры</h2><p>Система сравнивает правую и левую стороны, ось суставов и центр корпуса.</p></div><span class="pill" id="camModePill">Ожидание</span></div>
+        <div class="module-stack cam-coach-lines" id="coachLines"><div class="coach-line idle"><b>Готово к старту</b><span>Включи камеру и выполни три условия кадра.</span></div></div>
+        <p class="cam-limitation" id="camLimitation">Свободный режим оценивает только видимую фронтальную симметрию, а не конкретное упражнение.</p>
+      </article>
+    </section>
+
+    <section class="screen" id="nutrition" data-title="Питание">
+      <section class="simple-screen-intro simple-only">
+        <span>Сегодня</span><h1>Питание и вода</h1><p>КБЖУ на день, дневник питания, вода, меню и полная база блюд.</p>
+        <div class="simple-inline-actions"><button type="button" class="primary" id="simpleNutritionFoodAdd">Добавить еду</button><button type="button" class="secondary" id="simpleNutritionWaterAdd">+200 мл воды</button></div>
+      </section>
+      <div class="nutrition-tabs" role="tablist" aria-label="Раздел питания">
+        <button type="button" id="nutritionMainTab" role="tab" aria-selected="true" data-nutrition-view="main">Моё питание</button>
+        <button type="button" id="nutritionCatalogTab" role="tab" aria-selected="false" aria-controls="recipeCatalogPanel" tabindex="-1" data-nutrition-catalog="recipes">База блюд</button>
+        <button type="button" id="nutritionDessertTab" role="tab" aria-selected="false" aria-controls="recipeCatalogPanel" tabindex="-1" data-nutrition-view="desserts">ПП-десерты</button>
+      </div>
+      <div id="recipeCatalogPanel" role="tabpanel" aria-labelledby="nutritionCatalogTab" hidden></div>
+      <div id="dessertPanel" class="dessert-panel" role="tabpanel" aria-labelledby="nutritionDessertTab" hidden>
+        <div class="dessert-heading"><h2>ПП-десерты</h2><span id="dessertTotal" class="dessert-total"></span></div>
+        <button type="button" class="primary" id="dessertsToMenu">Добавить десерты в меню</button>
+        <p class="dessert-menu-status" id="dessertMenuStatus" role="status"></p>
+        <input type="search" class="food-search" id="dessertSearch" aria-label="Поиск десертов" placeholder="Название или ингредиент">
+        <div class="recipe-filter-row dessert-filters">
+          <select id="dessertType" aria-label="Способ приготовления"><option value="all">Все десерты</option><option value="baked">Выпечка</option><option value="no_bake">Без выпечки</option><option value="frozen">Замороженные</option><option value="stovetop">На плите</option></select>
+          <select id="dessertBudget" aria-label="Бюджет десерта"><option value="all">Любой бюджет</option><option value="simple">Простые</option><option value="balanced">Баланс</option><option value="premium">Премиум</option></select>
+        </div>
+        <p class="recipe-result-count" id="dessertResultCount" role="status"></p>
+        <div class="recipe-grid" id="dessertGrid"></div>
+        <button type="button" class="secondary recipe-more" id="dessertMore" hidden>Показать ещё</button>
+      </div>
+      <div class="diary-date-panel reveal" aria-label="Дневник за последние семь дней">
+        <div class="diary-date-head"><span id="diaryDayContext">Сегодня</span><b id="diaryDayLabel">Дневник за сегодня</b></div>
+        <div class="diary-date-strip" id="diaryDateStrip" role="tablist" aria-label="Выбрать день"></div>
+        <div class="diary-workout-status" id="diaryWorkoutStatus"><span>Тренировка</span><b>Нет отметки</b><em>результат выбранного дня</em></div>
+        <div class="diary-result-grid" aria-label="Результат выбранного дня">
+          <div><span>Съедено</span><b id="diaryResultEaten">0 ккал</b></div>
+          <div><span>Активность</span><b id="diaryResultActive">Нет данных</b></div>
+          <div><span>Шаги</span><b id="diaryResultSteps">Нет данных</b></div>
+        </div>
+        <p class="diary-result-balance" id="diaryResultBalance">Результат появится после заполнения дня.</p>
+      </div>
+      <article class="glass-card reveal nutrition-kcal-card">
+        <div class="card-head"><div><h2 id="kcalCardTitle">КБЖУ · сегодня</h2><p>Норма под твою цель, вес и активность. Адаптируется по отчётам.</p></div><div class="cal-toggle" id="calToggle" role="group" aria-label="Период нормы"><button type="button" class="cal-tg on" data-cal="day">День</button><button type="button" class="cal-tg" data-cal="week">Неделя</button></div></div>
+        <div class="kcal-ring" id="kcalRing" style="--eaten:0" role="img" aria-label="Калории за день: съедено и осталось">
+          <div class="kcal-ring-inner"><span class="kcal-eyebrow">осталось</span><b id="kcalLeft">2150</b><span class="kcal-unit">ккал</span></div>
+        </div>
+        <div class="kcal-stats">
+          <div class="kcal-stat eaten"><span>Съедено</span><b id="kcalEaten">0</b></div>
+          <div class="kcal-stat goal"><span>Цель</span><b id="kcal">2150</b></div>
+        </div>
+        <div class="macro-rows">
+          <div class="macro-row"><span class="m-dot prot"></span><b>Белок</b><i id="mProt">0 / 170 г</i><div class="m-bar"><u class="prot" id="mProtBar" style="width:0%"></u></div></div>
+          <div class="macro-row"><span class="m-dot fat"></span><b>Жиры</b><i id="mFat">0 / 68 г</i><div class="m-bar"><u class="fat" id="mFatBar" style="width:0%"></u></div></div>
+          <div class="macro-row"><span class="m-dot carb"></span><b>Углеводы</b><i id="mCarb">0 / 210 г</i><div class="m-bar"><u class="carb" id="mCarbBar" style="width:0%"></u></div></div>
+        </div>
+        <p class="norm-note" id="normNote"></p>
+        <div class="water-block">
+          <div class="water-ring" id="waterRing" style="--filled:33"><span class="water-ml"><b id="waterRingVal">0.8</b><i>л</i></span></div>
+          <div class="water-info">
+            <span class="water-eyebrow"><svg class="drop-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3.2 4 6 7 6 10.5a6 6 0 0 1-12 0C6 10 8.8 7 12 3Z"/></svg>Вода</span>
+            <b><span id="waterDone">0.0</span> / <span id="waterTargetInline">—</span> л</b>
+            <span class="water-sub" id="waterSub">осталось 1.6 л</span>
+          </div>
+          <div class="water-actions">
+            <button type="button" class="water-add water-minus" id="minusWater200">−200 мл</button>
+            <button type="button" class="water-add water-minus" id="minusWater100">−100 мл</button>
+            <button type="button" class="water-add" id="addWater100">+100 мл</button>
+            <button type="button" class="water-add" id="addWater200">+200 мл</button>
+          </div>
+        </div>
+        <button class="primary shine" id="adaptCalories">Снизить норму при плато</button>
+      </article>
+      <article class="glass-card reveal" id="menuWeekCard">
+        <div class="card-head compact"><div><h2>Меню на неделю</h2><p>Под твою норму КБЖУ. Тапни день, чтобы увидеть блюда, рецепты и фото.</p></div><span class="pill">7 дней</span></div>
+        <label class="menu-rhythm-control" for="menuRepeatDays"><span>Разнообразие меню</span><select id="menuRepeatDays"><option value="1">Разное каждый день</option><option value="2">Меню на 2 дня</option><option value="3">Меню на 3 дня</option><option value="7">Одно меню на неделю</option></select></label>
+        <label class="menu-dessert-control"><input type="checkbox" id="menuDesserts"><span>С десертом каждый день</span></label>
+        <div class="menu-build-actions"><button class="primary shine" id="menuGen">Собрать меню на неделю</button><button type="button" class="secondary" id="menuRestore" hidden>Вернуть предыдущее меню</button></div>
+        <div class="menu-week" id="menuWeek"></div>
+        <button type="button" class="secondary recipe-catalog-open" id="recipeCatalogOpen">Открыть рецепты</button>
+      </article>
+      <article class="glass-card reveal history-card">
+        <div class="card-head compact"><div><h2>История за неделю</h2><p>Калории, вода и быстрый повтор еды из прошлых дней.</p></div><span class="pill" id="histAvg">~2000 ккал</span></div>
+        <div class="history-chart" id="historyChart" role="img" aria-label="График калорий и воды за 7 дней"></div>
+        <div class="history-legend"><span><i class="leg-dot kcal"></i>калории</span><span><i class="leg-dot water"></i>вода</span></div>
+        <div class="history-summary" id="historySummary">Среднее: <b>~2000 ккал</b> · вода <b>2.2 л</b></div>
+        <div class="history-meals" id="historyMeals"></div>
+      </article>
+      <article class="glass-card reveal delay-1 simple-food-log-card">
+        <div class="card-head compact"><div><h2 id="foodLogTitle">Дневник питания</h2><p id="foodLogSub">Добавляй, что съел. Кольцо и макросы считаются по факту. Или собери меню под норму.</p></div><span class="pill" id="foodLogCount">0</span></div>
+        <div class="food-log" id="foodLog"></div>
+        <div class="food-actions"><button type="button" class="primary shine" id="foodAdd">+ Добавить еду</button><button type="button" class="secondary" id="foodPhoto">Фото блюда</button><button type="button" class="secondary" id="foodGen">Собрать меню под КБЖУ</button></div>
+        <button type="button" class="food-clear" id="foodClear">Очистить день</button>
+      </article>
+    </section>
+
+    <section class="screen" id="bodymap" data-title="Цель и аватар">
+      <article class="glass-card reveal body-summary-card">
+        <div class="card-head compact"><div><h2>Твоя цель</h2><p>Маршрут по анкете: цель, срок, темп, тренировки и питание в одной логике.</p></div><span class="pill" id="goalStatusPill">по анкете</span></div>
+        <div class="body-avatar-panel">
+          <div class="body-avatar-stage"><span class="figure-aura" id="bodyFigureAura"></span><span class="figure-wrap body-figure-wrap" id="bodyAvatarWrap"></span></div>
+          <div class="body-mini" id="bodyMiniBio"></div>
+        </div>
+        <div class="analysis-grid" id="goalMetricGrid"></div>
+        <div class="ai-note clean" id="goalComment">Маршрут соберётся из анкеты, замеров и дневных отчётов.</div>
+        <div class="body-actions"><button class="primary shine" id="analyzeGoal">Обновить маршрут</button><button class="secondary" data-jump="onboarding">Уточнить анкету</button></div>
+      </article>
+      <article class="glass-card reveal delay-1">
+        <div class="card-head compact"><div><h2>Краткий анализ тела</h2><p>Ориентир по анкете и BodyCheck, без медицинских обещаний и псевдоточных цифр.</p></div><span class="pill" id="bodyRiskPill">оценка</span></div>
+        <div class="analysis-grid body-analysis-grid" id="bodyInsightGrid"></div>
+        <p class="body-note">Ориентир по четырём фото и замерам показывает диапазон процента жира. Это не биоимпеданс с датчиками и не медицинский диагноз.</p>
+      </article>
+    </section>
+
+    <section class="screen" id="forecast" data-title="Прогноз тела">
+      <article class="period-forecast"><h2>По твоим отчётам</h2><p id="periodForecastSummary">Нет данных для прогноза.</p><button type="button" class="secondary" data-jump="reports">Недельный и месячный отчёт</button></article>
+      <article class="glass-card reveal">
+        <div class="card-head compact"><div><h2>Прогноз формы</h2><p>Сценарий результата по твоей цели и срокам: что реально меняется при дисциплине по плану.</p></div><span class="pill" id="forecastPill">расчёт</span></div>
+        <div class="forecast-board body-forecast-board" id="forecastBoard">
+          <div class="forecast-photo now"><i class="forecast-visual" data-forecast-visual="now"></i><b>Сейчас</b><span id="forecastNow">анкета + замеры</span></div>
+          <div class="forecast-photo ref"><i class="forecast-visual" data-forecast-visual="d90"></i><b>90 дней</b><span id="forecast90">первые видимые сдвиги</span></div>
+          <div class="forecast-photo after"><i class="forecast-visual" data-forecast-visual="d180"></i><b>180 дней</b><span id="forecast180">форма закрепляется</span></div>
+          <div class="forecast-photo year"><i class="forecast-visual" data-forecast-visual="d365"></i><b>365 дней</b><span id="forecast365">устойчивая система</span></div>
+        </div>
+        <div class="analysis-grid" id="forecastMetricGrid"></div>
+        <div class="body-actions"><button class="primary shine" id="simulateForecast">Обновить прогноз</button><button class="secondary" data-jump="reports">Добавить замеры</button></div>
+      </article>
+      <article class="glass-card reveal delay-1"><h2>Честно о результате</h2><p id="forecastCopy">“Копировать чужую фигуру 1-в-1 нельзя: кости, пропорции и точки крепления мышц разные. Но можно приблизиться к визуалу и даже выглядеть лучше в своей анатомии.”</p></article>
+    </section>
+
+    <section class="screen" id="bio" data-title="Кабинет">
+      <div class="tracker-grid reveal"><button id="addWater"><span>Вода</span><b id="waterLiters">0.8 л</b><em>настроить</em></button><button id="trkWeight"><span>Вес</span><b id="trkWeightVal">... кг</b><em id="trkWeightDelta">сдать отчёт</em></button><button id="trkMeas"><span>Замеры</span><b id="trkMeasVal">талия ...</b><em>фото + см</em></button><button id="trkSleep"><span>Сон / отчёт</span><b id="trkSleepVal">не отмечен</b><em>дневной чек</em></button></div>
+      <article class="glass-card reveal delay-1 profile-settings-card">
+        <div class="card-head compact"><div><h2>Настройки программы</h2><p>Пол влияет на аватар, КБЖУ и биоанализ. Уровень — на сложность тренировок.</p></div><span class="pill" id="profileLevelPill">...</span></div>
+        <div class="profile-setting-row">
+          <span>Пол</span>
+          <div class="profile-segment-switch profile-gender-switch" id="profileGenderSwitch" role="group" aria-label="Пол">
+            <button type="button" data-profile-gender="Мужчина">Мужчина</button>
+            <button type="button" data-profile-gender="Женщина">Женщина</button>
+          </div>
+        </div>
+        <div class="profile-setting-row">
+          <span>Уровень тренировок</span>
+          <div class="profile-segment-switch profile-level-switch" id="profileLevelSwitch" role="group" aria-label="Уровень тренировок">
+            <button type="button" data-profile-level="Новичок">Новичок</button>
+            <button type="button" data-profile-level="Любитель">Средний</button>
+            <button type="button" data-profile-level="Подготовленный атлет">Подготовленный</button>
+          </div>
+        </div>
+        <p class="profile-setting-note" id="profileLevelNote">Если упражнения стали слишком лёгкими или тяжёлыми, поменяй уровень здесь. Тренировка дня пересоберётся под новый выбор.</p>
+        <button class="secondary" data-jump="onboarding" data-anketa-step="1">Открыть всю анкету</button>
+      </article>
+      <article class="glass-card reveal delay-1">
+        <div class="card-head compact"><div><h2>Биокарта тела</h2><p>Короткий разбор фигуры по анкете, весу, талии и недельным отчётам.</p></div><span class="pill" id="bioRiskPill">фокус</span></div>
+        <div class="analysis-grid body-analysis-grid" id="bioMapGrid"></div>
+        <p id="bioAdvice">Заполни анкету и веди отчёты. Здесь появится фокус недели и адаптация КБЖУ под твой прогресс.</p>
+        <div class="body-actions"><button class="primary shine" id="adaptCaloriesBio">Адаптировать КБЖУ</button><button class="secondary" data-jump="reports">Открыть BodyCheck</button></div>
+      </article>
+      <article class="glass-card reveal delay-2 profile-account-card">
+        <div class="card-head"><div><h2>Аккаунт</h2><p id="acctEmail">...</p></div></div>
+        <button class="secondary" id="logoutBtn">Выйти из аккаунта</button>
+        <div class="profile-danger-zone">
+          <div><b>Начать заново</b><span>Удалить анкету, программы и весь накопленный прогресс.</span></div>
+          <button type="button" id="progressResetBtn">Начать прогресс заново</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="screen" id="rewards" data-title="Статус клуба">
+      <article class="glass-card game-hero reveal">
+        <div class="card-head"><div><h2>Система прогресса</h2><p>Закрывай цели дня: получаешь баллы прогресса. Баллы поднимают уровень, статус клуба и двигают тебя в рейтинге. Виден прогресс и твой аватар.</p></div><span class="pill" id="rankPill">#170</span></div>
+        <div class="game-dashboard">
+          <div><span>Статус</span><b id="leagueName">Новичок</b><em id="nextMilestone">до следующего статуса</em></div>
+          <div><span>Баллы</span><b id="myXpInline">0 баллов</b><em>копятся за цели и отчёты</em></div>
+          <div><span>Статус</span><b id="statusName">На старте пути</b><em>тело → режим → характер</em></div>
+        </div>
+      </article>
+
+      <article class="glass-card reveal delay-1">
+        <div class="rank-card"><b id="rankStory">Твой путь только начинается</b><span id="rankNextStep">Закрывай тренировку, воду и отчёт: так растёт место в рейтинге.</span><meter id="gameProgress" min="0" max="100" value="0"></meter></div>
+        <button class="primary shine" id="claimQuest">Закрыть недельную цель +75 баллов</button>
+      </article>
+
+      <article class="glass-card reveal delay-2">
+        <div class="card-head"><div><h2>Рейтинг игроков</h2><p>Твоё место среди участников клуба растёт за активность.</p></div><span class="pill">сезон</span></div>
+        <div class="rating-me">
+          <div class="rating-cell"><span>Место</span><b>#<i id="myRankInline">170</i></b></div>
+          <div class="rating-cell"><span>Баллы</span><b id="myXpInlineBoard">0 баллов</b></div>
+        </div>
+        <p class="rating-hint" id="leaderHint">ещё немного баллов до топ-100</p>
+        <div class="rating-soon">Полный топ-100 среди участников откроется со стартом сезона</div>
+      </article>
+
+      <article class="glass-card reveal delay-3 prize-soon">
+        <div class="card-head"><div><h2>Реальные призы</h2><p>Баллы копятся уже сейчас. Сезонные призы за топ рейтинга откроются совсем скоро.</p></div><span class="pill pill-soon">скоро</span></div>
+        <div class="soon-banner">Раздел призов скоро откроется</div>
+      </article>
+    </section>
+
+    <section class="screen" id="reports" data-title="Отчёты">
+      <section class="simple-screen-intro simple-only">
+        <span>Динамика</span><h1>Твой прогресс</h1><p>Результат недели, тренировки, вес и замеры собраны в одном месте.</p>
+        <div class="simple-link-grid"><button type="button" data-jump="workout-history">История тренировок</button><button type="button" data-jump="bodymap">Цель и изменения</button><button type="button" data-jump="bio">Профиль и замеры</button><button type="button" data-jump="forecast">Прогноз</button></div>
+      </section>
+      <article class="progress-avatar-card simple-only" aria-labelledby="progressAvatarTitle">
+        <div class="progress-avatar-stage" aria-hidden="true"><span class="figure-aura" id="progressAvatarAura"></span><span class="figure-wrap" id="progressAvatarWrap"></span><span class="figure-badge" id="progressAvatarBadge">Ур.1</span></div>
+        <div class="progress-avatar-copy"><span>Визуальный прогресс</span><h2 id="progressAvatarTitle">Твоя форма</h2><p id="progressAvatarSummary">Аватар обновляется по анкете, уровню и замерам.</p><div class="progress-avatar-bar" aria-hidden="true"><i id="progressAvatarBar"></i></div><small id="progressAvatarNext">До следующего уровня</small><button type="button" data-jump="bodymap">Цель и изменения</button></div>
+      </article>
+      <article class="period-report" id="weeklyInsightCard" aria-label="Отчёт по питанию и тренировкам">
+        <div class="period-report-heading"><h2>Твой результат</h2><div class="period-report-tabs" role="group" aria-label="Период отчёта"><button type="button" data-report-period="7" aria-pressed="true">Неделя</button><button type="button" data-report-period="30" aria-pressed="false">Месяц</button></div></div>
+        <div class="period-report-nav"><button type="button" id="periodReportPrev" aria-label="Предыдущий период" title="Предыдущий период">‹</button><div><b id="periodReportRange"></b><span id="periodReportWindow"></span></div><button type="button" id="periodReportNext" aria-label="Следующий период" title="Следующий период" disabled>›</button><button type="button" id="periodReportRefresh" aria-label="Обновить отчёт" title="Обновить отчёт">↻</button></div>
+        <p id="periodReportStatus" class="period-report-status" role="status"></p>
+        <div id="periodReportContent" aria-live="polite"></div>
+        <div class="period-report-actions"><button type="button" class="secondary" id="periodReportShare" disabled>Поделиться итогом</button><button type="button" class="secondary" data-jump="nutrition">Питание</button><button type="button" class="secondary" data-jump="workout-history">Тренировки</button></div>
+      </article>
+
+      <article class="glass-card reports-actions-card reveal delay-1"><div class="card-head"><div><h2>Добавить в отчёты</h2><p>Ежедневный факт, BodyCheck, фото прогресса или видео техники - только то, что нужно сейчас.</p></div><span class="pill">+баллы</span></div><div class="report-grid"><button type="button" id="rWeekly">BodyCheck · замеры</button><button type="button" id="rDaily">Дневной отчёт</button><button type="button" id="rPhoto">4 фото для BodyCheck</button><button type="button" id="rVideo">Видео техники</button></div></article>
+
+      <article class="glass-card bodycheck-card reveal delay-1" id="bodyCheckCard">
+        <div class="card-head compact"><div><h2>BodyCheck</h2><p>Четыре фото и замеры дают ориентировочный диапазон. Умные весы и биоимпеданс остаются более точным источником.</p></div><span class="pill" id="bodyCheckStatusPill">не заполнен</span></div>
+        <div class="bodycheck-summary" id="bodyCheckSummary"></div>
+        <div class="bodycheck-card-actions"><button type="button" class="primary shine" id="openBodyCheck">Добавить BodyCheck</button><button type="button" class="secondary" id="bodyCheckOpenPhotos" hidden>Открыть фото</button></div>
+      </article>
+
+      <article class="glass-card apple-health-connection reveal delay-1" id="appleHealthConnection" hidden>
+        <div class="card-head compact"><div><h2>Apple Health</h2><p id="appleHealthLastSync">Синхронизации пока не было</p></div><span class="pill" id="appleHealthConnectionStatus">Не подключено</span></div>
+        <div class="apple-health-actions">
+          <button type="button" class="secondary" id="appleHealthConnect" disabled>Создать личный код</button>
+          <button type="button" class="apple-health-refresh" id="appleHealthRefresh" aria-label="Обновить данные Apple Health" title="Обновить данные">↻</button>
+        </div>
+        <label class="apple-health-consent" id="appleHealthConsentWrap">
+          <input type="checkbox" id="appleHealthConsent">
+          <span>Согласен на импорт агрегатов Apple Health: шаги и активные калории.</span>
+        </label>
+        <section class="apple-health-composition" id="appleHealthComposition" hidden>
+          <div><span>Состав тела</span><b id="appleHealthCompositionStatus">Не подключён</b></div>
+          <p id="appleHealthCompositionNote">Процент жира появляется только из данных, которые уже есть в Apple Health.</p>
+          <label class="apple-health-consent apple-health-composition-consent" id="appleHealthCompositionConsentWrap">
+            <input type="checkbox" id="appleHealthCompositionConsent">
+            <span>Согласен на импорт процента жира, массы тела и безжировой массы из Apple Health.</span>
+          </label>
+          <button type="button" class="secondary" id="appleHealthEnableComposition">Подключить состав тела</button>
+          <div class="apple-health-composition-manage">
+            <button type="button" class="secondary" id="appleHealthDisableComposition" hidden>Отключить состав тела</button>
+            <button type="button" class="danger" id="appleHealthDeleteComposition" hidden>Удалить состав тела</button>
+          </div>
+        </section>
+        <div class="apple-health-setup" id="appleHealthSetup" hidden>
+          <div class="apple-health-one-time" id="appleHealthOneTime" hidden>
+            <div class="apple-health-key">
+              <span>Личный код, показан один раз</span>
+              <code id="appleHealthShortcutKey"></code>
+              <small id="appleHealthKeyHint">Код показывается только один раз. Если потеряли его, обновите ключ.</small>
+            </div>
+            <div class="apple-health-primary-actions">
+              <a class="primary" id="appleHealthInstallShortcut" target="_blank" rel="noopener" hidden>Установить Shortcut</a>
+              <button type="button" class="secondary" id="appleHealthCopyKey" disabled>Скопировать код</button>
+            </div>
+          </div>
+          <button type="button" class="apple-health-guide-toggle" id="appleHealthAutomationGuide" aria-expanded="false">Как настроить автоматизацию</button>
+          <div class="apple-health-automation" id="appleHealthAutomationSteps" hidden>
+            <div><time>08:30</time><span>Автоматизация «Время суток» запускает Форма Sync без подтверждения.</span></div>
+            <div><time>21:30</time><span>Добавьте второй такой же запуск Форма Sync без входных данных.</span></div>
+          </div>
+          <div class="apple-health-manage">
+            <button type="button" id="appleHealthRotateKey">Обновить ключ</button>
+            <button type="button" id="appleHealthRevokeKey">Отключить</button>
+            <button type="button" class="danger" id="appleHealthDeleteData">Удалить данные</button>
+          </div>
+        </div>
+        <p class="apple-health-action-status" id="appleHealthActionStatus" aria-live="polite"></p>
+      </article>
+
+      <article class="glass-card reveal delay-1"><h2>BodyCheck: 4 ракурса</h2><p>Одежда: тёмное бельё, плавки, шорты, купальник или боксёры. Свет, расстояние и ракурс одинаковые каждую неделю. Фото хранятся приватно только с твоего согласия.</p><div class="pose-grid"><div><b>01</b><span>Лицом к камере, руки спокойно вниз</span></div><div><b>02</b><span>Спиной к камере, корпус ровно</span></div><div><b>03</b><span>Бок левый, руки опущены</span></div><div><b>04</b><span>Бок правый, руки опущены</span></div><div class="wide"><b>Важно</b><span>Фото и замеры дают ориентировочный диапазон процента жира. Это не биоимпеданс и не диагноз; данные умных весов точнее.</span></div></div><button class="primary shine" id="submitWeeklyReport">Открыть BodyCheck +40 баллов</button></article>
+
+      <article class="glass-card reveal delay-2"><h2>Ритм отчётности</h2><div class="module-stack compact-stack"><div><b>Вес</b><span>только по субботам утром, не каждый день, чтобы не ловить качели воды и паники</span></div><div><b>Ежедневно</b><span>тренировка, вода, питание / КБЖУ, короткий чек самочувствия</span></div><div><b>Еженедельно</b><span>4 фото, замеры, вес, короткое видео техники или позинга</span></div><div><b>Зачем</b><span>баллы, статус, рейтинг, честная адаптация программы и визуальный прогресс</span></div></div></article>
+
+      <article class="glass-card reveal delay-3"><div class="card-head"><div><h2>Задания дня</h2><p>То, что двигает баллы, рейтинг, аватар и доступ.</p></div><span class="pill">live</span></div><div class="task-list" id="taskList"></div></article>
+
+      <article class="glass-card reveal delay-3"><h2>Напоминания</h2><div class="module-stack compact-stack"><div><b>Вода</b><span>каждый час: “а ты выпил 200 мл?”</span></div><div><b>Тренировка</b><span>пуш утром и за 60 минут</span></div><div><b>Вечер</b><span>закрыть дневной отчёт: тренировка / вода / питание / сон</span></div><div><b>Суббота</b><span>вес + фото в 4 позах + замеры, строго с тем же ракурсом</span></div></div><button class="secondary" id="remToggle">Включить напоминания</button></article>
+    </section>
+
+    <section class="screen" id="curator" data-title="Куратор">
+      <article class="glass-card chat-card reveal"><div class="card-head"><div><h2>Куратор 24/7</h2><p>Чат внутри приложения. Telegram может присылать пуш/напоминание, но консультационный сценарий остаётся тут.</p></div><span class="pill">чат</span></div><form class="chat-form" id="chatForm"><input id="chatInput" placeholder="Спроси про тренировку, питание, анализы..." /><button class="primary" aria-label="Отправить"><svg class="send-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></svg></button></form><div class="curator-context-launch"><div><b>Нужна персональная подсказка?</b><span>Соберём факты дня, а ты сам выберешь, что отправить куратору.</span></div><button type="button" class="secondary" id="curatorContext">Поделиться контекстом</button></div><div class="chat-chips" id="chatChips"></div><div class="chat" id="chatBox"></div></article>
+      <article class="glass-card support-card reveal delay-1"><div class="card-head compact"><div><h2>Служба заботы</h2><p>Если кнопка не сработала или данные выглядят неверно, отправь нам короткое обращение со скриншотом.</p></div><span class="pill">Telegram</span></div><button type="button" class="secondary" id="supportCurator">Сообщить о проблеме</button></article>
+    </section>
+
+    <section class="screen" id="health" data-title="Восстановление">
+      <button class="secondary lib-open-btn" data-jump="stretching">Растяжка</button>
+      <article class="glass-card reveal"><div class="card-head"><div><h2>Восстановление</h2><p>Мобильность, анализы, БАДы и навигация к специалистам собраны в одном месте, без медицинских обещаний.</p></div><span class="pill">care</span></div></article>
+      <article class="glass-card reveal delay-1"><h2>Восстановление после тренировок</h2><div class="module-stack"><div><b>Разбитость / усталость</b><span>сон, вода, белок, разгрузочный день, дыхание</span></div><div><b>Болят мышцы</b><span>лёгкое кардио, мобилизация, тёплый душ, без геройства</span></div><div><b>План восстановления</b><span>приложение даёт короткий комплекс под состояние</span></div></div></article>
+      <article class="glass-card reveal delay-2"><h2>Мобильность суставов</h2><div class="joint-grid"><button class="chip active">Плечи</button><button class="chip">Локти</button><button class="chip">Кисти</button><button class="chip">Паховая зона</button><button class="chip">ТБС</button><button class="chip">Колени</button><button class="chip">Голеностоп</button><button class="chip">Спина</button></div><p>Лекции: зачем растяжка, что убирает спазмы, как укреплять суставы и связки под дальнейшую работу.</p></article>
+      <article class="glass-card reveal delay-3"><h2>Анализы</h2><div class="module-stack"><div><b>Чекап каждый месяц</b><span>минимальный список показателей и контроль самочувствия</span></div><div><b>Чекап раз в 3 месяца</b><span>расширенный профиль, чтобы видеть динамику здоровья</span></div><div><b>Разбор показателей</b><span>подсветим, что вне нормы, и что обсудить с врачом</span></div><div><b>Специалисты</b><span>эндокринолог, пептиды, фармакология, БАДы как образовательный слой</span></div></div><button class="primary shine" id="openLabs">Загрузить анализы</button></article>
+      <article class="glass-card reveal delay-3"><h2>БАДы / витамины / минералы</h2><p>Рекомендации под цель и анализы: что пить, зачем, где купить. Важно: формулировки как навигация и образовательный разбор, не лечение.</p></article>
+    </section>
+
+    <section class="screen" id="pharma" data-title="Фарма">
+      <article class="glass-card reveal">
+        <div class="card-head"><div><h2>Раздел по фарме</h2><p>Не “назначения из приложения”, а понятный образовательный контур: что люди обычно спрашивают, какие есть риски, какие анализы нужны и когда нужен врач.</p></div><span class="pill">18+</span></div>
+        <div class="module-stack">
+          <div><b>Карта тем</b><span>гормоны, восстановление, дефициты, противопоказания, побочки, красные флаги</span></div>
+          <div><b>Перед стартом</b><span>опросник, базовые анализы, давление, самочувствие, история здоровья</span></div>
+          <div><b>Контроль</b><span>чекпоинты каждые 2–4 недели: анализы, вес, сон, либидо, настроение, кожа</span></div>
+          <div><b>Специалист</b><span>если тема выходит за БАДы и бытовое здоровье, нужен маршрут к врачу/эндокринологу</span></div>
+        </div>
+        <button class="primary shine" id="openPharma">Открыть фарма-чеклист</button>
+      </article>
+      <article class="glass-card reveal delay-1"><h2>Принцип безопасности</h2><p>Мы специально не даём дозировки и схемы. Приложение объясняет риски, собирает данные и направляет к специалисту, если ты пытаешься лечиться сам.</p></article>
+    </section>
+
+    <section class="screen" id="peptides" data-title="Пептиды">
+      <article class="glass-card reveal">
+        <div class="card-head"><div><h2>Раздел по пептидам</h2><p>Отдельный блок для recovery/сон/суставы/кожа/аппетит: объясняем простым языком, что обсуждать со специалистом и какие данные отслеживать.</p></div><span class="pill">edu</span></div>
+        <div class="module-stack">
+          <div><b>Цель применения</b><span>восстановление, сон, связки/суставы, аппетит, кожа, общий recovery</span></div>
+          <div><b>Разбор категорий</b><span>без схем и обещаний: механизм, ожидания, ограничения, что нельзя смешивать без врача</span></div>
+          <div><b>Трекер реакции</b><span>сон, отёки, давление, ЖКТ, голод, настроение, тренировки, фото и замеры</span></div>
+          <div><b>Связка с анализами</b><span>Система подсвечивает вопросы к специалисту и ведёт дневник наблюдений</span></div>
+        </div>
+        <button class="primary shine" id="openPeptide">Создать дневник наблюдений</button>
+      </article>
+      <article class="glass-card reveal delay-1"><h2>Без магии и обещаний</h2><p>Пептиды здесь как образовательный раздел: не «курс из чата», а понимание, что проверить и с кем обсуждать.</p></article>
+    </section>
+
+    <section class="screen" id="market" data-title="Магазин">
+      <article class="glass-card reveal"><h2>Магазин и партнёры</h2><p>Клубы, клиники, гаджеты, одежда и БАДы: партнёрские предложения для участников клуба. Раздел скоро откроется.</p><div class="market-list"><div><svg class="mini-icon mini-map" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6l4-2 6 2 4-2v14l-4 2-6-2-4 2V6Z"/><path d="M9 4v14M15 6v14"/></svg><em>Клубы рядом</em><b>карта</b></div><div><svg class="mini-icon mini-clinic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h14V8l-7-4-7 4v11Z"/><path d="M12 9v6M9 12h6"/></svg><em>Клиники</em><b>скидка 10%</b></div><div><svg class="mini-icon mini-gear" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12M7 17h10"/><path d="M9 7v10M15 7v10"/></svg><em>Инвентарь</em><b>кэшбэк 7%</b></div><div><svg class="mini-icon mini-watch" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M9.5 4h5M9.5 20h5M12 10v2l1.6 1"/></svg><em>Гаджеты</em><b>партнёрка</b></div><div><svg class="mini-icon mini-pill" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 16.5 16.5 7.5a3 3 0 0 1 4.2 4.2l-9 9a3 3 0 0 1-4.2-4.2Z"/><path d="M12 12l4 4"/></svg><em>БАДы</em><b>PRIME</b></div><div><svg class="mini-icon mini-wear" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h8l3 4-2 2-1-1v9H8v-9l-1 1-2-2 3-4Z"/></svg><em>Одежда</em><b>промокод</b></div></div><button class="primary soon-cta" disabled>Откроется скоро</button></article>
+    </section>
+
+    <section class="screen" id="growth" data-title="Рефералка">
+      <article class="glass-card reveal prize-soon"><div class="card-head"><div><h2>Рефералка</h2><p>Приглашай друзей и получай бонусные дни подписки. Личная ссылка и бонусы появятся совсем скоро.</p></div><span class="pill pill-soon">скоро</span></div><div class="soon-banner">Реферальная программа скоро откроется</div></article>
+    </section>
+
+    <section class="screen" id="guide" data-title="Навигатор">
+      <article class="glass-card reveal"><div class="card-head"><div><h2>Путеводитель по клубу</h2><p>Короткий гид: что где находится и зачем. Сначала анкета, затем тренировка, питание и отчёт.</p></div><span class="pill">гид</span></div><div class="guide-player"><span class="gp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="19" r="1.7"/><path d="M6.6 17.4 15.6 8.2" stroke-dasharray="2 2.7"/><path d="M15.6 8.2V3.6"/><path d="M15.6 3.6 21 5.2 15.6 7Z"/></svg></span><b>5 шагов до результата</b><p>Анкета / день / питание / отчёт / рейтинг. Жми кнопку, проведу по каждому экрану.</p></div><button class="primary shine" id="startGuide">Открыть гид по клубу</button></article>
+      <article class="glass-card reveal delay-1"><h2>Маршрут новичка</h2><p class="route-hint">Нажми на шаг, открою нужный экран.</p><div class="club-flow"><div class="flow-step active" data-jump="onboarding"><i>1</i><b>Заполни стартовую анкету</b><span>физданные, цель, питание, травмы; 5 шагов</span></div><div class="flow-step" data-jump="training"><i>2</i><b>Открой день</b><span>тренировка, КБЖУ, вода, мобилити</span></div><div class="flow-step" data-jump="reports"><i>3</i><b>Сдай отчёт</b><span>дневной чек + субботние фото/замеры по шаблону</span></div><div class="flow-step" data-jump="rewards"><i>4</i><b>Поднимайся в рейтинге</b><span>баллы, статусы, рост в топ-100</span></div></div></article>
+      <article class="glass-card reveal delay-2"><h2>Зачем это нужно</h2><p>Приложение ведёт тебя по шагам: не нужно гадать, куда жать, как фотографироваться и когда взвешиваться. Telegram остаётся для поддержки и общения.</p></article>
+    </section>
+
+    <section class="screen" id="club" data-title="TG-клуб">
+      <article class="glass-card intro reveal"><div class="section-icon club-brand-mark" aria-hidden="true"><span class="club-brand-pb"><img src="assets/neutral/training.png?v=flow46" alt="" /></span><span class="club-brand-tg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 4.6 18.4 19c-.23 1.05-.85 1.31-1.72.82l-4.76-3.51-2.3 2.21c-.25.25-.47.47-.96.47l.34-4.85 8.82-7.97c.38-.34-.08-.53-.6-.19L6.32 12.85 1.63 11.38C.61 11.06.59 10.36 1.85 9.87L20.17 2.8c.85-.32 1.59.2 1.33 1.8Z"/></svg></span></div><h2>Telegram-клуб дополняет приложение</h2><p>Канал отвечает за общение и контент: посты, голосовые, эфиры, сообщество, отчётные треды и напоминания. Основной функционал остаётся в приложении.</p><button class="primary shine" data-link="club">Открыть Telegram-клуб</button></article>
+      <div class="club-flow reveal delay-1"><div class="flow-step active"><i>1</i><b>Приложение</b><span>план, трекеры, тренировки, питание, куратор, аватар, прогресс</span></div><div class="flow-step"><i>2</i><b>Закрытый канал</b><span>контент, голосовые, эфиры, записи, задания недели</span></div><div class="flow-step"><i>3</i><b>Бот/пуши</b><span>доступ, напоминания, быстрые ссылки на нужный экран</span></div><div class="flow-step"><i>4</i><b>Отчёты</b><span>треды в TG усиливают дисциплину, а баллы считает приложение</span></div></div>
+      <article class="glass-card reveal delay-2"><h2>Контент в канале</h2><div class="content-grid"><button data-link="club"><svg class="content-icon icon-voice" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v9"/><path d="M8 10c0 2.4 1.5 4 4 4s4-1.6 4-4"/><path d="M9 20h6M12 17v3"/></svg><b>Голосовые</b><span>пинки и объяснения</span></button><button data-link="club"><svg class="content-icon icon-live" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="6" width="14" height="10" rx="2"/><path d="M10 19h4M12 16v3M10 9l4 2.5-4 2.5V9Z"/></svg><b>Эфиры</b><span>live + записи</span></button><button data-link="club"><svg class="content-icon icon-post" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5h10v15H7z"/><path d="M9.5 8h5M9.5 11h5M9.5 14h3"/></svg><b>Посты</b><span>ошибки, питание, дисциплина</span></button><button data-link="club"><svg class="content-icon icon-report" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12l4 4 8-9"/><path d="M5 5h14v14H5z"/></svg><b>Отчёты</b><span>поддержка и мотивация</span></button></div></article>
+    </section>
+
+    <section class="screen" id="more" data-title="Ещё">
+      <section class="simple-screen-intro simple-only">
+        <span>Форма</span><h1>Ещё</h1><p>Профиль, помощь, восстановление и дополнительные возможности платформы.</p>
+      </section>
+      <div class="more-groups">
+        <section><h2>Прогресс и профиль</h2><button type="button" data-jump="reports"><b>Прогресс</b><span>Результат недели, тренировки, вес, фото и замеры</span></button><button type="button" data-jump="bio"><b>Профиль и настройки</b><span>Анкета, цель и параметры программы</span></button><button type="button" data-jump="onboarding"><b>Изменить анкету</b><span>Тренировки, питание и ограничения</span></button><button type="button" id="simpleSubscription"><b>Подписка</b><span>Статус и продление доступа</span></button></section>
+        <section><h2>Помощь</h2><button type="button" data-jump="curator"><b>AI-куратор</b><span>Вопросы по тренировкам и питанию</span></button><button type="button" id="simpleSupport"><b>Служба заботы</b><span>Проблемы с приложением или данными</span></button><button type="button" data-jump="club"><b>Telegram-клуб</b><span>Общение, эфиры и материалы</span></button></section>
+        <section><h2>Здоровье и сервисы</h2><button type="button" data-jump="health"><b>Восстановление</b><span>Растяжка, мобильность и самочувствие</span></button><button type="button" data-jump="reports"><b>Apple Health</b><span>Шаги и активные калории</span></button><button type="button" data-jump="pharma"><b>Образовательные материалы</b><span>Анализы, риски и вопросы специалисту</span></button><button type="button" data-jump="rewards"><b>Достижения</b><span>Баллы, статус и рейтинг</span></button></section>
+      </div>
+    </section>
+
+    <div class="lib-detail-overlay" id="libDetail" hidden></div>
+    <div class="lib-detail-overlay" id="workoutDetail" hidden></div>
+    <div class="lib-detail-overlay" id="foodPicker" hidden></div>
+    <div class="lib-detail-overlay" id="menuDetail" hidden></div>
+    <div class="lib-detail-overlay" id="appSheet" hidden></div>
+    <nav class="bottom-nav glass-panel" aria-label="Главное меню приложения">
+      <!-- Lucide icon nodes are inlined so navigation stays available before JS loads. -->
+      <button class="active" data-jump="today" aria-label="Сегодня"><svg class="tab-icon tab-home" data-icon="house" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><b data-short="Сегодня">Сегодня</b></button>
+      <button data-jump="training" aria-label="Тренировки"><svg class="tab-icon tab-training" data-icon="dumbbell" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"/><path d="m2.5 21.5 1.4-1.4"/><path d="m20.1 3.9 1.4-1.4"/><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"/><path d="m9.6 14.4 4.8-4.8"/></svg><b data-short="Трен.">Тренировки</b></button>
+      <button data-jump="nutrition" aria-label="Питание"><svg class="tab-icon tab-food" data-icon="utensils" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg><b data-short="Питание">Питание</b></button>
+      <button class="classic-nav-only" data-jump="reports" aria-label="Отчёты"><svg class="tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16H6z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg><b data-short="Отчёты">Отчёты</b></button>
+      <button class="classic-nav-only" data-jump="curator" aria-label="Куратор"><svg class="tab-icon tab-ai" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14v9H10l-5 3V7Z"/><path d="M8.5 10h7M8.5 13h4"/></svg><b data-short="Куратор">Куратор</b></button>
+      <button class="simple-nav-only" data-jump="more" aria-label="Ещё"><svg class="tab-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="18" cy="12" r="1"/></svg><b data-short="Ещё">Ещё</b></button>
+    </nav>
+  </main>
+
+  <div class="toast" id="toast">Готово</div>
+  
+  
+  
+      
+      
+      
+      
+      
+<script src="runtime-config.js"></script><script src="vendor/supabase.js"></script><script src="session-bridge.js"></script><script type="module" src="boot.mjs"></script></body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "id": "demo-quesadilla",
+  "sourceId": "demo-quesadilla",
+  "description": "Хрустящая лепёшка, нежное яйцо и шпинат.",
+  "atlas": "/assets/neutral/quesadilla.png",
+  "atlasColumns": 2,
+  "atlasRows": 3,
+  "cover": {
+    "index": 0
+  },
+  "color": "#dfc4a6",
+  "layers": [
+    {
+      "label": "Сыр",
+      "index": 3,
+      "scale": 0.85
+    },
+    {
+      "label": "Яйцо и шпинат",
+      "index": 2,
+      "scale": 0.85
+    },
+    {
+      "label": "Лепёшка",
+      "index": 1,
+      "scale": 1
+    }
+  ],
+  "steps": [
+    {
+      "title": "Подготовь продукты",
+      "image": 4
+    },
+    {
+      "title": "Собери начинку",
+      "image": 2
+    },
+    {
+      "title": "Подрумянь кесадилью",
+      "image": 5
+    }
+  ]
+}

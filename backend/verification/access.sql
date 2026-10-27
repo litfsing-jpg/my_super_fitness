@@ -1,0 +1,78 @@
+insert into auth.users(id,email,email_confirmed_at) values('11111111-1111-4111-8111-111111111111','alice@example.invalid',now()),('22222222-2222-4222-8222-222222222222','bob@example.invalid',now());
+update public.wl_installation set legal_ready=true,legal_revision='fixture',legal_docs='{"offer":"/legal/offer.html","privacy":"/legal/privacy.html","consent":"/legal/consent.html","health":"/legal/consent.html"}';
+insert into public.pb_consents(user_id,accepted_pd,accepted_offer,accepted_privacy,accepted_health_data,accepted_confidential,consent_version) select id,true,true,true,true,true,'fixture' from auth.users;
+insert into public.pb_subscriptions(user_id,status,current_period_end) values('11111111-1111-4111-8111-111111111111','active',now()+interval '5 days'),('22222222-2222-4222-8222-222222222222','active',now()+interval '5 days');
+insert into public.pb_user_state(user_id,profile) values('11111111-1111-4111-8111-111111111111','{"name":"Alice"}'),('22222222-2222-4222-8222-222222222222','{"name":"Bob"}');
+set role authenticated;
+select set_config('request.jwt.claim.sub','11111111-1111-4111-8111-111111111111',false);
+do $$begin
+ assert (select count(*) from public.pb_user_state)=1,'Owner isolation';
+ assert public.wl_has_paid_access(),'Paid access';
+ assert not public.wl_is_admin(),'No self-elevation';
+ begin update public.pb_user_state set user_id='22222222-2222-4222-8222-222222222222';raise exception 'Owner substitution allowed';exception when insufficient_privilege then null;end;
+ begin perform public.wl_reserve_telegram(1,1,gen_random_uuid());raise exception 'Identity mutation exposed';exception when insufficient_privilege then null;end;
+ begin perform public.wl_billing_begin(auth.uid(),'month','stars',gen_random_uuid(),'1',true);raise exception 'Billing mutation exposed';exception when insufficient_privilege then null;end;
+end$$;
+reset role;
+update public.wl_installation set legal_revision='changed-fixture';
+set role authenticated;
+do $$begin assert not public.wl_has_paid_access(),'New legal revision closes RLS';assert (select count(*) from public.pb_user_state)=0,'No direct consent-screen bypass';end$$;
+reset role;
+update public.wl_installation set legal_revision='fixture';
+update public.pb_subscriptions set current_period_end=now()-interval '1 minute' where user_id='11111111-1111-4111-8111-111111111111';
+set role authenticated;
+do $$begin assert not public.wl_has_paid_access(),'Expiry closes access';assert (select count(*) from public.pb_user_state)=0,'Expired data is closed';end$$;
+reset role;
+do $$begin assert (select count(*) from public.pb_user_state)=2,'Expiry preserves data';end$$;
+update public.wl_billing_plans set enabled=true;
+do $$declare o jsonb;paid jsonb;ends timestamptz;n uuid:=gen_random_uuid();a uuid:='11111111-1111-4111-8111-111111111111';begin
+ o:=public.wl_billing_begin(a,'month','yookassa',n,'fixture-shop',true);
+ assert o=public.wl_billing_begin(a,'month','yookassa',n,'fixture-shop',true),'Order retry idempotency';
+ paid:=jsonb_build_object('provider','yookassa','orderId',o->>'id','userId',a,'externalId','fixture-payment','amount',99000,'currency','RUB','shopId','fixture-shop','test',true,'status','succeeded');
+ begin perform public.wl_billing_settle((o->>'id')::uuid,paid||'{"amount":1}');raise exception 'Bad amount granted';exception when raise_exception then if sqlerrm<>'payment_mismatch' then raise;end if;end;
+ o:=public.wl_billing_settle((o->>'id')::uuid,paid);ends:=(o->>'period_end')::timestamptz;
+ assert public.wl_billing_settle((o->>'id')::uuid,paid)->>'period_end'=o->>'period_end','Duplicate grant';
+ assert ends>now()+interval '29 days','Period granted';
+ assert (select count(*) from public.pb_payments where user_id=a)=1,'One payment row';
+ assert (select count(*) from public.pb_user_state where user_id=a)=1,'Progress restored';
+end$$;
+do $$declare o jsonb;p jsonb;a uuid:='11111111-1111-4111-8111-111111111111';e timestamptz;begin
+ select current_period_end into e from public.pb_subscriptions where user_id=a;
+ o:=public.wl_billing_begin(a,'month','yookassa',gen_random_uuid(),'fixture-shop',true);
+ perform public.wl_billing_attach((o->>'id')::uuid,'fixture-refunded-first','https://example.invalid/pay');
+ p:=jsonb_build_object('provider','yookassa','orderId',o->>'id','userId',a,'externalId','fixture-refunded-first','amount',99000,'currency','RUB','shopId','fixture-shop','test',true,'status','refunded');
+ assert public.wl_billing_settle((o->>'id')::uuid,p)->>'status'='refunded','Refund before success is terminal';
+ assert public.wl_billing_settle((o->>'id')::uuid,p||'{"status":"succeeded"}')->>'status'='refunded','Late success cannot resurrect refund';
+ assert (select current_period_end from public.pb_subscriptions where user_id=a)=e,'No refunded grant';
+end$$;
+do $$declare r jsonb;r2 jsonb;n uuid:=gen_random_uuid();u uuid:=gen_random_uuid();provision uuid;begin
+ r:=public.wl_reserve_telegram(123,456,n);provision:=(r->>'provisionId')::uuid;
+ r2:=public.wl_reserve_telegram(123,456,n);assert r=r2,'Reservation retry stable';
+ begin perform public.wl_reserve_telegram(123,456,gen_random_uuid());raise exception 'Concurrent identity lease allowed';exception when raise_exception then if sqlerrm<>'identity_busy' then raise;end if;end;
+ insert into auth.users(id,email) values(u,provision::text||'@telegram.invalid');
+ assert public.wl_finish_telegram(123,456,n,u)=u,'Verified Telegram mapping';
+ assert public.wl_verified_user(u),'Telegram verified without invented human email';
+ perform public.wl_create_link_nonce('11111111-1111-4111-8111-111111111111',repeat('a',64));
+ assert public.wl_complete_link(repeat('a',64),123,789)='11111111-1111-4111-8111-111111111111','Explicit linking preserves UUID';
+ begin perform public.wl_complete_link(repeat('a',64),123,790);raise exception 'Nonce replay allowed';exception when raise_exception then if sqlerrm<>'invalid_link_nonce' then raise;end if;end;
+ perform public.wl_create_link_nonce('22222222-2222-4222-8222-222222222222',repeat('b',64));
+ begin perform public.wl_complete_link(repeat('b',64),123,789);raise exception 'Cross-owner identity merge allowed';exception when raise_exception then if sqlerrm<>'identity_conflict' then raise;end if;end;
+ update auth.users set banned_until=now()+interval '1 day' where id=u;assert not public.wl_verified_user(u),'Banned Telegram principal denied';
+end$$;
+insert into storage.objects(bucket_id,name,owner,metadata) values('proofs','11111111-1111-4111-8111-111111111111/tasks/33333333-3333-4333-8333-333333333333.jpg','11111111-1111-4111-8111-111111111111','{"mimetype":"image/jpeg","size":100}');
+set role authenticated;
+select set_config('request.jwt.claim.sub','11111111-1111-4111-8111-111111111111',false);
+do $$declare r jsonb;begin
+ r:=public.wl_submit_proof('33333333-3333-4333-8333-333333333333','mobility','Демо-задание','','11111111-1111-4111-8111-111111111111/tasks/33333333-3333-4333-8333-333333333333.jpg','image/jpeg',(now() at time zone 'UTC')::date,null);
+ assert r->>'ok'='true','Private evidence saved';assert public.wl_my_proofs()->>'total'='1','Owner sees evidence';
+ begin perform public.wl_proof_json((r->'proof'->>'id')::uuid);raise exception 'Unscoped proof function exposed';exception when insufficient_privilege then null;end;
+end$$;
+select set_config('request.jwt.claim.sub','22222222-2222-4222-8222-222222222222',false);
+do $$begin assert public.wl_my_proofs()->>'total'='0','Other user cannot see proof';end$$;
+reset role;
+set role anon;
+do $$begin
+ begin perform 1 from public.pb_user_state;raise exception 'Anonymous data exposed';exception when insufficient_privilege then null;end;
+end$$;
+reset role;
+select 'WHITE_LABEL_DATABASE_CHECKS_OK';

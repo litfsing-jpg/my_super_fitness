@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.local/
+.tmp/
+dist/
+*.log
+.DS_Store
+._*
+content/media/*
+!content/media/.gitkeep
+.vercel/
+supabase/.temp/

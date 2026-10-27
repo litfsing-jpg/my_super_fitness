@@ -1,0 +1,31 @@
+{
+  "name": "fitness-whitelabel-template",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env.local server/start.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "demo": "node scripts/demo.mjs",
+    "doctor": "node --env-file-if-exists=.env.local scripts/doctor.mjs",
+    "test:db": "node tests/database-check.mjs",
+    "test:integration:local": "node scripts/test-local-stack.mjs",
+    "package": "node scripts/package-template.mjs",
+    "setup": "node scripts/setup.mjs",
+    "admin": "node --env-file-if-exists=.env.local scripts/admin.mjs",
+    "verify:package": "node scripts/verify-package.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.118.0",
+    "express": "5.2.1",
+    "fflate": "0.8.3",
+    "grammy": "1.30.0"
+  },
+  "devDependencies": {
+    "acorn": "8.18.0"
+  }
+}

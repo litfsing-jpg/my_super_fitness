@@ -1,0 +1,11 @@
+{
+  "name": "Моя фитнес-платформа",
+  "shortName": "Форма",
+  "accent": "#dfc4a6",
+  "accentDark": "#c49b75",
+  "background": "#0e0e10",
+  "supportEmail": "Litfsing@gmail.com",
+  "logo": "/assets/neutral/logo.svg",
+  "legalRevision": "owner-v1",
+  "legalReady": true
+}
