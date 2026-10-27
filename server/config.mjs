@@ -21,9 +21,9 @@ export function readConfig(env=process.env,brand=baseBrand){
     let role;try{role=JSON.parse(Buffer.from(anonKey.split('.')[1],'base64url')).role;}catch{}
     if(role!=='anon')throw Error('Public Supabase key required');
   }
-  const port=Number(env.WL_PORT||new URL(appOrigin).port||4210);
+  const port=Number(env.WL_PORT||env.PORT||new URL(appOrigin).port||4210);
   if(!Number.isInteger(port)||port<1||port>65535)throw Error('Invalid port');
-  const host=env.WL_BIND_HOST||'127.0.0.1';
+  const host=env.WL_BIND_HOST||(local?'127.0.0.1':'0.0.0.0');
   if(local&&!localHost(host))throw Error('Local HTTP must bind to loopback');
   const paymentMode=env.WL_BILLING_MODE||'test';
   if(!['test','live'].includes(paymentMode))throw Error('Invalid billing mode');
